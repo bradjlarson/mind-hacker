@@ -1,0 +1,24 @@
+<template name="grateful">
+	<div class="span8 better-block">
+		<div id="grateful_success" class="alert hidden">
+		  <button type="button" class="close" data-dismiss="alert alert-success">&times;</button>
+		  <strong>Success!</strong> Gratitude(s) Saved.
+		</div>
+		<h4 class="page-header">3 Things I am grateful for:</h4>
+		<div class="span4">
+		<table class="table table-bordered table-striped">
+		{{#each gratitude}}
+			<tr>
+				<td>{{item}}</td>
+			</tr>
+		{{/each}}
+		</table>
+		</div>		
+		{{#if grateful_check}}
+		<div class="input-append span8">
+		  <input id="todays-gratitude" type="text">
+		  <button class="btn" id="add_gratitude">Add</button>
+		</div>	
+		{{/if}}
+	</div>	
+</template>

@@ -1,0 +1,24 @@
+<template name="tasks_today">
+	<div class="span8 better-block">
+		<div class="alert hidden">
+		  <button type="button" class="close" data-dismiss="alert">&times;</button>
+		  <strong>Warning!</strong> Best check yo self, you're not looking too good.
+		</div>
+		<h4 class="page-header">Today's Tasks:</h4>
+		<div class="span4">
+		<table class="table table-bordered">
+			{{#each today}}
+				<tr>
+					<td>{{task}}</td>
+				</tr>
+			{{/each}}
+		</table>
+		</div>	
+		{{#if today_check}}
+		<div class="input-append span8">
+		  <input id="todays-task" type="text">
+		  <button class="btn" id="add-task">Add</button>
+		</div>
+		{{/if}}
+	</div>	
+</template>
