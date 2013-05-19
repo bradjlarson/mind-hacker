@@ -4,14 +4,70 @@ summaries = new Meteor.Collection("summaries");
 grateful = new Meteor.Collection("grateful");
 done = new Meteor.Collection("done");
 surveys = new Meteor.Collection("surveys");
+counterfact = new Meteor.Collection("counterfact");
 
 if (Meteor.isServer)
 {
 	
+//Accounts.config({forbidClientAccountCreation : true});
+Meteor.publish("Tasks", function() {
+	return tasks.find({user_id : this.userId});
+});
+Meteor.publish("Summaries", function() {
+	return summaries.find({user_id : this.userId});
+});
+Meteor.publish("Grateful", function() {
+	return grateful.find({user_id : this.userId});
+});
+
+Meteor.publish("Done", function() {
+	return done.find({user_id : this.userId});
+});
+
+Meteor.publish("Surveys", function() {
+	return surveys.find({user_id : this.userId});
+});
+
+Meteor.publish("Counterfact", function() {
+	return counterfact.find({user_id : this.userId});
+});
+
+Meteor.methods({
+	'update_records' : function() {
+	tasks.update({}, {$set : {user_id : this.userId}}, {multi : true});
+	summaries.update({}, {$set : {user_id : this.userId}}, {multi : true});
+	grateful.update({}, {$set : {user_id : this.userId}}, {multi : true});
+	done.update({}, {$set : {user_id : this.userId}}, {multi : true});
+	surveys.update({}, {$set : {user_id : this.userId}}, {multi : true});
+	counterfact.update({}, {$set : {user_id : this.userId}}, {multi : true});
+	return "records updated";
+	}	
+});
+
+//Meteor.call('update_records', function(error, result){console.log(error+'/'+result)});
+
+/*
+tasks.update({}, {$set : {user_id : this.userId}});
+summaries.update({}, {$set : {user_id : this.userId}});
+grateful.update({}, {$set : {user_id : this.userId}});
+done.update({}, {$set : {user_id : this.userId}});
+surveys.update({}, {$set : {user_id : this.userId}});
+counterfact.update({}, {$set : {user_id : this.userId}});
+*/
 }
 
 if (Meteor.isClient)
 {
+/*
+Meteor.subscribe("Tasks");
+Meteor.subscribe("Summaries");
+Meteor.subscribe("Grateful");
+Meteor.subscribe("Done");
+Meteor.subscribe("Surveys");
+Meteor.subscribe("Counterfact");
+*/
+	
+//setTimeout(function(){var today = new Date(); Session.set("now", today.timeNow_is());}, 1000);
 	
 Meteor.startup(function() {
 	var today = new Date();
@@ -46,6 +102,24 @@ Template.todayis.today = function() {
 Template.todayis.now = function() {
 	return Session.get("now");
 };
+
+Template.splash.logged_out = function() {
+	if (Meteor.user())
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}	
+		
+};
+
+Template.splash.logged_in = function() {
+	return Meteor.user();
+};
+
+
 
 /*
 tasks structure:

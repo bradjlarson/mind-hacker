@@ -23,7 +23,7 @@ Template.tasks_today.events = {
 		if (task_text)
 		{
 			tasks.insert({task : task_text, create_date : Session.get("today"), last_date : Session.get("today"), create_time : Session.get("now"), user_id : Meteor.userId(), complete : false});	
-			$('#todays-task').val("");
+			$('#todays-task').val("").focus();
 		}
 	},
 };

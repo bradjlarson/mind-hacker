@@ -1,0 +1,24 @@
+<template name="counter_factual">
+	<div class="span8 better-block">
+		<div id="counter_success" class="alert hidden">
+		  <button type="button" class="close" data-dismiss="alert alert-success">&times;</button>
+		  <strong>Success!</strong> Counter Factual(s) Saved.
+		</div>
+		<h4 class="page-header">3 Things I could have done better yesterday:</h4>
+		<div class="span4">
+		<table class="table table-bordered">
+		{{#each counter_fact}}
+			<tr>
+				<td>{{item}}</td>
+			</tr>
+		{{/each}}
+		</table>
+		</div>		
+		{{#if counter_check}}
+		<div class="input-append span8">
+		  <input id="todays-counterfact" type="text">
+		  <button class="btn" id="add-counterfact">Add</button>
+		</div>	
+		{{/if}}
+	</div>	
+</template>

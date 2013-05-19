@@ -15,6 +15,11 @@ Template.summ_yesterday.events = {
 		}
 		//Session.set("summary_done", true);
 		$('#summary_success').removeClass('hidden');
+	},
+	'click #summary_submit' : function(event) {
+		//Code to add readonly input to textarea
+		//change summary background to green alert (alert-success)
+		//Add green check mark after better block header (maybe make a function for this)
 	}
 };
 

@@ -2,11 +2,11 @@
 	<div class="span8 better-block">
 		<h4 class="page-header">Yesterdays Tasks:</h4>
 		<div class="span5">
-		<table class="table table-bordered table-striped">
+		<table class="table table-bordered">
 		{{#each yesterday}}
 			<tr>
 				<td>{{task}}<div class="btn-group pull-right" data-toggle="buttons-radio">
-					<button id="{{_id}}" class="btn btn-success task-remove" type="button"><i class="icon-ok icon-white"></i></button><button name="{{_id}}" class="btn btn-danger task-stay" type="button"><i class="icon-remove icon-white"></i></button></td>
+					<button name="{{_id}}" class="btn btn-success task-remove" type="button"><i name="{{_id}}" class="icon-ok icon-white task-remove"></i></button><button name="{{_id}}" class="btn btn-danger task-stay" type="button"><i name="{{_id}}" class="icon-remove icon-white task-stay"></i></button></td>
 			</tr>
 		{{/each}}
 		</table>

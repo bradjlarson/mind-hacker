@@ -21,6 +21,6 @@ Template.grateful.events = {
 	'click #add_gratitude' : function(event) {
 		var gratitude_text = $('#todays-gratitude').val();
 		grateful.insert({item : gratitude_text, create_date : Session.get("today"), create_time : Session.get("now"), user_id : Meteor.userId()});
-		$('#todays-gratitude').val("");
+		$('#todays-gratitude').val("").focus();
 	}
 };

@@ -1,6 +1,6 @@
 Template.tasks_yesterday.events = {
 	'click .task-remove' : function(event) {
-		var task_id = event.target.id;
+		var task_id = $(event.target).attr("name");
 		tasks.update(task_id, {$set : {complete : true}});
 		console.log('task : '+task_id+' removed.');
 	},
@@ -12,5 +12,5 @@ Template.tasks_yesterday.events = {
 };
 
 Template.tasks_yesterday.yesterday = function() {
-	return tasks.find({last_date : Session.get("yesterday"), complete : false});
+	return tasks.find({last_date : {$lte : Session.get("yesterday")}, complete : false});
 };

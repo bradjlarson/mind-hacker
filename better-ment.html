@@ -4,23 +4,44 @@
 
 <body>
 	<div class="container">
-		{{> todayis}}
-		{{> summ_yesterday}}
-		{{> tasks_yesterday}}
-		{{> tasks_today}}
-		{{> grateful}}
-		{{> today_i_feel}}
-		{{> yesterday_i_felt}}
+		{{> splash}}
 	</div>
 </body>
 
 <template name="todayis">
 	<div class="span8">
 		<h3 class="page-header pull-left">BetterMe</h3>
-		<h3 class="page-header pull-right">Today is: {{today}} @ {{now}}</h3>
+		<h3 class="page-header pull-right">Today is: {{today}} @ {{now}} </h3>
 	</div>
+	<div class="span8">
+		<div class="pull-right">{{loginButtons}}</div>
+	</div>	
 </template>
 
+<template name="login_beta">
+	<h1 class="page-header"></h1>
+	<div class="hero-unit span10">
+		<h1>Welcome to BetterMe</h1> 
+		<h2>(currently in Beta)</h2>
+		<p>To get started, please create an account.</p>
+		<p>{{loginButtons}}</p>	
+	</div>
+</template>	
+<template name="splash">
+	{{#if logged_out}}
+		{{> login_beta}}
+	{{/if}}	
+	{{#if logged_in}}
+		{{> todayis}}
+		{{> summ_yesterday}}
+		{{> tasks_yesterday}}
+		{{> tasks_today}}
+		{{> grateful}}
+		{{> counter_factual}}
+		{{> today_i_feel}}
+		{{> yesterday_i_felt}}
+	{{/if}}
+</template>	
 
 
 
