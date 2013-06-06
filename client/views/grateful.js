@@ -13,7 +13,11 @@ Template.grateful.grateful_check = function() {
 	{
 		return false;
 		Session.set("grateful_done", true);
+		$('#gratefuls').collapse('hide');
+		$('#counter').collpase('show');
 		$('#grateful_success').removeClass('hidden');
+		$("#grateful-header").addClass("text-success");
+		console.log('grateful done');
 	}
 };
 

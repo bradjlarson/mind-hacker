@@ -2,9 +2,12 @@
 tasks = new Meteor.Collection("tasks");
 summaries = new Meteor.Collection("summaries");
 grateful = new Meteor.Collection("grateful");
-done = new Meteor.Collection("done");
+done = new Meteor.Collection("done"); 
 surveys = new Meteor.Collection("surveys");
 counterfact = new Meteor.Collection("counterfact");
+blocks = new Meteor.Collection("blocks");
+about = new Meteor.Collection("about");
+contact = new Meteor.Collection("contact");
 
 if (Meteor.isServer)
 {
@@ -30,6 +33,18 @@ Meteor.publish("Surveys", function() {
 
 Meteor.publish("Counterfact", function() {
 	return counterfact.find({user_id : this.userId});
+});
+
+Meteor.publish("Blocks", function() {
+	return blocks.find({user_id : this.userId});
+});
+
+Meteor.publish("About", function() {
+	return about.find();
+});
+
+Meteor.publish("Contact", function() {
+	return contact.find({user_id : this.userId});
 });
 
 Meteor.methods({
@@ -58,14 +73,16 @@ counterfact.update({}, {$set : {user_id : this.userId}});
 
 if (Meteor.isClient)
 {
-/*
+
 Meteor.subscribe("Tasks");
 Meteor.subscribe("Summaries");
 Meteor.subscribe("Grateful");
-Meteor.subscribe("Done");
+Meteor.subscribe("Done", function() {Session.set("done_load", true);});
 Meteor.subscribe("Surveys");
 Meteor.subscribe("Counterfact");
-*/
+Meteor.subscribe("Blocks");
+Meteor.subscribe("About");
+Meteor.subscribe("Contact");
 	
 //setTimeout(function(){var today = new Date(); Session.set("now", today.timeNow_is());}, 1000);
 	
@@ -103,6 +120,14 @@ Template.todayis.now = function() {
 	return Session.get("now");
 };
 
+Template.splash.today_done = function() {
+	return true;
+}
+
+Template.splash.today_not_done = function() {
+	return false;
+}
+
 Template.splash.logged_out = function() {
 	if (Meteor.user())
 	{
@@ -118,6 +143,43 @@ Template.splash.logged_out = function() {
 Template.splash.logged_in = function() {
 	return Meteor.user();
 };
+
+Template.side_bar.events = {
+	'click #launch_about' : function() {
+		$('#main').html(Meteor.render(Template.about));
+		console.log('main');},
+	'click #launch_today' : function() {
+		$('#main').html(Meteor.render(Template.today_main));
+		console.log('today');
+		today_better_check();},
+	'click #launch_previous' : function(event) {
+		$('#main').html(Meteor.render(Template.previously));
+		console.log('previously');},
+	'click #launch_progress' : function(event) {
+		//$('#main').html(Meteor.render(Template.progress));
+		console.log('progress');},
+	'click #launch_settings' : function(event) {
+		$('#main').html(Meteor.render(Template.settings));
+		console.log('settings');},
+	'click #launch_contact' : function(event) {
+		$('#main').html(Meteor.render(Template.contact));
+		console.log('contact');}										
+};
+
+function today_better_check() {
+	if (Session.get("done_load"))
+	{
+		var num_done = done.find({create_date : Session.get("today")}).count();
+		console.log(num_done);
+		var current_block = num_done + 1;
+		console.log(current_block);
+		if (num_done < 7)
+		{
+		$("#block-"+current_block).modal('show');
+		}
+		console.log('better_check');
+	}	
+}
 
 
 

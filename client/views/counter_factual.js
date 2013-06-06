@@ -13,7 +13,10 @@ Template.counter_factual.counter_check = function() {
 	{
 		return false;
 		Session.set("counter_done", true);
+		$('#counter').collapse('hide');
+		$('#today_form').collapse('show');
 		$('#counter_success').removeClass('hidden');
+		$("#counter-header").addClass("text-success");
 	}
 };
 

@@ -1,0 +1,21 @@
+<template name="contact">
+	<div class="span6">
+		<form id="contact_form">
+			<legend>How can we help you:</legend>
+			{{#isolate}}
+			<textarea id="feedback_text" rows="6" class="span6" placeholder="What's on your mind?"></textarea>
+			<select id="feedback_type">
+				<option value="question">Question</option>
+				<option value="general">General Feedback</option>
+				<option value="suggestion">Suggestion</option>
+				<option value="bug">Bug</option>
+			</select>
+			{{/isolate}}
+			<div>
+			{{#isolate}}	
+			<button class="btn btn-inverse" id="contact_submit">Submit</button>
+			{{/isolate}}
+			</div>
+		</form>
+	</div>
+</template>

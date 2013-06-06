@@ -1,0 +1,92 @@
+<template name="about">
+	{{#isolate}}
+	<div id="about_instruct" class="alert">
+	  	<button type="button" class="close" data-dismiss="alert">&times;</button>
+	  	<strong>Click on a topic to read more...</strong>
+	</div>
+	{{/isolate}}
+	<div class="accordion" id="about_topics">
+	{{#each block}}
+		<div class="accordion-group">
+		    <div class="accordion-heading">
+			<a class="accordion-toggle" data-toggle="collapse" data-parent="#about_topics" href="#{{_id}}">
+				<div class="page-header">
+					<h4 class="about-name" name="{{_id}}">{{block_name}}</h4>
+					<h5 class="about-header">{{about_header}}</h5>
+				</div>
+			</a>	
+			<div id="{{_id}}" class="accordion-body collapse in">
+	      		<div class="accordion-inner">				
+					<p class="about-body">{{about_body}}</p>
+				</div>	
+			</div>
+		</div>	
+	{{/each}}
+	<br />
+	<br />
+</template>
+
+
+<!--
+
+about.insert({block_name : "Welcome to BetterMe", about_header : "What is BetterMe?", about_body : "BetterMe is built on a simple principle: There are simple things you can do on a daily basis that will make a big difference in your quality of life. We do this by marrying the insights of psychology with the power of technology. BetterMe is comprised of 'better blocks' - short activities that are designed to improve a specific aspect of your life. Each of these activities are backed by a psychology study that explains how and why this activity makes you better. In the sections that follow, we provide you with a short description of the activities as well as a link to the study behind it. We also provide examples of the feedback we'll provide as you complete each activity. Our goal is to prove that these findings can be realized by the general population, and to create better, happier, and more fulfilled users.", order : 1});
+
+about.insert({block_name : "Summarizing Yesterday", about_header : "Improving short term memory and priming you for the other tasks", about_body : "Quickly summarizing everything you did yesterday forces you to think back to what you did previously, and strengthens the connections between neurons containing those memories. This makes it more likely for those memories to make it into long term memory (note: this is not an acceptable alternative to adequate sleep, where most of the conversion from short to long term memory takes place). It also jogs your memory about things you still need to do today, ideas you may have had, and gets you thinking about what you can be thankful for and what you can do better.", order : 2});
+
+about.insert({block_name : "Goal Setting (Tasks)", about_header : "Keeping you organized, and more likely to achieve your goals", about_body : "Research has shown that by picking 1-5 things to focus on each day make you more likely to actually achieve those goals. BetterMe keeps track of your goals from day to day, allowing you to easily keep track of and set goals, and making sure that you're setting good goals, and that you're completing them.", order : 3});
+
+about.insert({block_name : "Gratitude Journal", about_header : "Making you happier", about_body : "A study recently showed that keeping gratitude journal can have significant on both your short term and long term happiness levels. Each day you'll write down 3 things you are thankful for, which forces you to focus on the positive aspects of your life. (Note: this activity is not well suited for people under 18, as their brains are still changing, growing, and developing).", order : 4});
+
+about.insert({block_name : "Additive Counterfactuals", about_header : "Acknowledging obstacles and helping you to overcome them", about_body : "The goal of this activity is to force you to think about what you could have done differently to achieve a better outcome. This does a couple things, including: forcing you to think about how you can be better, recognize obstacles, prime your brain to recognize that reaching your goals is a challenge, and that there will likely be setbacks. This type of thinking, as opposed to negative counterfactuals (thinking about a different outcome with no thought of how to get there), makes you much more likely to achieve your goals and overcome any obstacles you might encounter. One study followed a number of 3rd grade classrooms in Germany as they were about to start learning English. Half of the classrooms were instructed to think about how at speaking English they would be at the end of the year, and what they could do with their new skills. The other half were instructed to the same thing, and then to take a few minutes to reflect on the challenges they would face learning English. At the end of the year, the difference was clear - the average grade for kids who had only thought about how good at English they would be had an average grade of a C, the kids that had taken to the time to think about the obstacles they would face had an average grade of an A.", order : 5});
+
+about.insert({block_name : "Daily Surveys", about_header : "Tracking your progress and giving you meaningful feedback", about_body : "These surveys are how we track whether or not you are getting better, and by how much. It also allows us to validate and test new better blocks as they are created.", order : 6});
+
+
+
+Improving short term memory and priming you for the other tasks
+
+Quickly summarizing everything you did yesterday forces you to think back to what you did previously, and strengthens the connections between neurons containing those memories. This makes it more likely for those memories to make it into long term memory (note: this is not an acceptable alternative to adequate sleep, where most of the conversion from short to long term memory takes place). It also jogs your memory about things you still need to do today, ideas you may have had, and gets you thinking about what you can be thankful for and what you can do better. 
+
+Keeping you organized, and more likely to achieve your goals
+
+Research has shown that by picking 1-5 things to focus on each day make you more likely to actually achieve those goals. BetterMe keeps track of your goals from day to day, allowing you to easily keep track of and set goals, and making sure that you're setting good goals, and that you're completing them.
+
+Making you happier
+
+A study recently showed that keeping gratitude journal can have significant on both your short term and long term happiness levels. Each day you'll write down 3 things you are thankful for, which forces you to focus on the positive aspects of your life. (Note: this activity is not well suited for people under 18, as their brains are still changing, growing, and developing). 
+
+Acknowledging obstacles and helping you to overcome them
+
+The goal of this activity is to force you to think about what you could have done differently to achieve a better outcome. This does a couple things, including: forcing you to think about how you can be better, recognize obstacles, prime your brain to recognize that reaching your goals is a challenge, and that there will likely be setbacks.
+
+This type of thinking, as opposed to negative counterfactuals (thinking about a different outcome with no thought of how to get there), makes you much more likely to achieve your goals and overcome any obstacles you might encounter. One study followed a number of 3rd grade classrooms in Germany as they were about to start learning English. Half of the classrooms were instructed to think about how at speaking English they would be at the end of the year, and what they could do with their new skills. The other half were instructed to the same thing, and then to take a few minutes to reflect on the challenges they would face learning English. At the end of the year, the difference was clear - the average grade for kids who had only thought about how good at English they would be had an average grade of a C, the kids that had taken to the time to think about the obstacles they would face had an average grade of an A. 
+
+Tracking your progress and giving you meaningful feedback
+
+These surveys are how we track whether or not you are getting better, and by how much. It also allows us to validate and test new better blocks as they are created.
+
+
+
+<template name="about">
+	{{#each block}}
+		<div class="about-block span6" id="{{block_name}}">
+			<div class="page-header">
+				<h4 class="about-name" name="{{_id}}">{{block_name}}</h4>
+				
+				<h5 class="about-header">{{about_header}}</h5>
+				
+			</div>
+			<div>
+				<p class="about-body">{{about_body}}</p>
+				
+			</div>	
+		</div>
+	{{/each}}
+</template>
+
+-->
+
+
+<!--	<h4 class="about-name"><input class="about-editable input-xxlarge" name="block-name.{{_id}}" value="{{block_name}}"></h4> -->
+<!-- <h5><input class="about-editable input-xxlarge" name="about-header.{{_id}}" value="{{about_header}}"></h5> -->
+<!-- <textarea class="about-body about-editable span6" rows="6" name="about-body.{{_id}}" value="{{about_body}}">{{about_body}}</textarea> -->

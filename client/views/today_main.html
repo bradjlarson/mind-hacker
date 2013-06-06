@@ -1,0 +1,39 @@
+<template name="today_main">
+	<div class="main-block row-fluid">
+		<h4 class="page-header">Tasks:</h4>
+		<div class="span10">
+			<table class="table table-bordered">
+				{{#each tasks}}
+				<tr>
+					<td>{{task}}<div class="btn-group pull-right" data-toggle="buttons-radio">
+					<button name="{{_id}}" class="btn btn-success task-remove" type="button"><i name="{{_id}}" class="icon-ok icon-white task-remove"></i></button><button name="{{_id}}" class="btn btn-danger task-stay" type="button"><i name="{{_id}}" class="icon-remove icon-white task-stay"></i></button></td>
+				</tr>
+				{{/each}}
+			</table>
+		</div>
+	</div>
+	<div class="main-block row-fluid">
+		<h4 class="page-header">Things I am thankful for today:</h4>	
+		<div class="span8">
+			<table class="table table-bordered">
+			{{#each grateful}}
+				<tr>
+					<td>{{item}}</td>
+				</tr>
+			{{/each}}
+			</table>
+		</div>
+	</div>
+	<div class="main-block row-fluid">
+		<h4 class="page-header">Things I can do better today:</h4>	
+		<div class="span8">
+			<table class="table table-bordered">
+			{{#each counterfact}}
+				<tr>
+					<td>{{item}}</td>
+				</tr>
+			{{/each}}
+			</table>
+		</div>		
+	</div>
+</template>

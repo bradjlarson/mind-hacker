@@ -4,9 +4,11 @@
 	  <strong>Success!</strong> Summary Saved.
 	</div>
 	<div class="span8 better-block">
-		<h4 class="page-header">Summary of Yesterday:</h4>
+		<h4 id="summ-yest-header" class="page-header" data-toggle="collapse" data-target="#summary">Summary of Yesterday:</h4>
+		<div id="summary" class="collapse in">
 		<textarea id="summ-yest" placeholder="Yesterday I..." class="span8" rows="15">{{#if previous}}{{summary}}{{/if}}	
 		</textarea>
 		<button class="btn btn-inverse pull-right" id="summary_submit">Submit</button>
+		</div>
 	</div>
 </template>

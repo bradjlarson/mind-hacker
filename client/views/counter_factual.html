@@ -4,7 +4,8 @@
 		  <button type="button" class="close" data-dismiss="alert alert-success">&times;</button>
 		  <strong>Success!</strong> Counter Factual(s) Saved.
 		</div>
-		<h4 class="page-header">3 Things I could have done better yesterday:</h4>
+		<h4 id="counter-header" class="page-header" data-toggle="collapse" data-target="#counter_facts">3 Things I could have done better yesterday:</h4>
+		<div id="counter_facts" class="collapse in">
 		<div class="span4">
 		<table class="table table-bordered">
 		{{#each counter_fact}}
@@ -22,3 +23,31 @@
 		{{/if}}
 	</div>	
 </template>
+
+<!--
+
+blocks.insert({
+	block_name : "counter_factual",
+	header_name : "counter_factual-header",
+	block_header : "3 Things I could have done better yesterday:",
+	block_body : '<div class="span4">
+	<table class="table table-bordered">
+	{{#each counter_fact}}
+		<tr>
+			<td>{{item}}</td>
+		</tr>
+	{{/each}}
+	</table>
+	</div>		
+	{{#if counter_check}}
+	<div class="input-append span8">
+	  <input id="todays-counterfact" type="text">
+	  <button class="btn" id="add-counterfact">Add</button>
+	</div>	
+	{{/if}}
+</div>',
+	order : 1,
+	next : 2
+});
+
+-->

@@ -1,0 +1,245 @@
+<template name="better_blocks">
+<!--	
+	{{#each block}}
+		<div id="{{block_name}}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="{{header_name}}" aria-hidden="true">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+				<h3 id="{{header_name}}">{{block_header}}</h3>
+			</div>
+			<div class="modal-body">
+				{{block_body}}
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Exit</button>
+				<button id="{{order}}.{{next}}" class="btn btn-success next-block" data-dismiss="modal" aria-hidden="true">Next</button>
+			</div>
+		</div>
+	{{/each}}
+-->
+	
+<!--This section contains hard coded modals, it will be removed after the modular system is perfected -->
+<!--summ-yest Modal: #1 -->
+
+<div id="block-1" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="counter-header" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+		<h3 id="summ-yest-header">Short Summary of Yesterday:</h3>
+	</div>
+	<div class="modal-body">
+		<div id="summary">
+			<textarea id="summ-yest" placeholder="Yesterday I..." class="span5" rows="15">{{#if previous}}{{summary}}{{/if}}	
+			</textarea>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Exit</button>
+		<button id="1.2" class="btn btn-success next-block" data-dismiss="modal" aria-hidden="true">Next</button>
+	</div>
+</div>
+<!--Tasks Yesterday Modal: #2 -->
+<div id="block-2" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="counter-header" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+		<h3 id="tasks-yesterday-header" >Yesterday's Tasks:</h3>
+	</div>
+	<div class="modal-body">
+		<div id="yesterdays_tasks" class="span5">
+			<table class="table table-bordered">
+			{{#isolate}}	
+			{{#if yesterday}}	
+			{{#each yesterday}}
+				<tr>
+					<td>{{task}}<div class="btn-group pull-right" data-toggle="buttons-radio">
+						<button name="{{_id}}" class="btn btn-success task-remove" type="button"><i name="{{_id}}" class="icon-ok icon-white task-remove"></i></button><button name="{{_id}}" class="btn btn-danger task-stay" type="button"><i name="{{_id}}" class="icon-remove icon-white task-stay"></i></button></td>
+				</tr>
+			{{/each}}
+			{{else}}
+				<tr>
+					<td>None.</td>
+				</tr>	
+			{{/if}}
+			{{/isolate}}
+			</table>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Exit</button>
+		<button id="2.3" class="btn btn-success next-block" data-dismiss="modal" aria-hidden="true">Next</button>
+	</div>
+</div>
+<!--Today's Tasks Modal: #3 -->
+<div id="block-3" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="counter-header" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+		<h3 id="today-tasks-header">Today's Tasks:</h3>
+	</div>
+	<div class="modal-body">
+		{{#isolate}}
+		<div class="span4">
+			<table class="table table-bordered">
+				{{#each today}}
+					<tr>
+						<td>{{task}}</td>
+					</tr>
+				{{/each}}
+			</table>
+		</div>	
+		{{#if today_check}}
+			<div class="input-append span4">
+				<input id="todays-task" type="text">
+			  	<button class="btn" id="add-task">Add</button>
+			</div>
+		{{/if}}
+		{{/isolate}}
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Exit</button>
+		<button id="3.4" class="btn btn-success next-block" data-dismiss="modal" aria-hidden="true">Next</button>
+	</div>
+</div>
+<!--Grateful Modal: #4 -->
+<div id="block-4" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="counter-header" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+		<h3 id="grateful-header">3 Things I am grateful for:</h3>
+	</div>
+	<div class="modal-body">
+		{{#isolate}}
+		<div class="span4">
+			<table class="table table-bordered">
+			{{#each gratitude}}
+				<tr>
+					<td>{{item}}</td>
+				</tr>
+			{{/each}}
+			</table>
+		</div>		
+		{{#if grateful_check}}
+		<div class="input-append span4">
+			<input id="todays-gratitude" type="text">
+			<button class="btn" id="add_gratitude">Add</button>
+		</div>	
+		{{/if}}
+		{{/isolate}}
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Exit</button>
+		<button id="4.5" class="btn btn-success next-block" data-dismiss="modal" aria-hidden="true">Next</button>
+	</div>
+</div>
+<!--Counter-facts Modal: #5 -->
+<div id="block-5" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="counter-header" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+		<h3 id="counter-header">3 Things I could have done better yesterday:</h3>
+	</div>
+	<div class="modal-body">
+		{{#isolate}}
+		<div class="span4">
+		<table class="table table-bordered">
+		{{#each counter_fact}}
+			<tr>
+				<td>{{item}}</td>
+			</tr>
+		{{/each}}
+		</table>
+		</div>		
+		{{#if counter_check}}
+		<div class="input-append span4">
+		  <input id="todays-counterfact" type="text">
+		  <button class="btn" id="add-counterfact">Add</button>
+		</div>	
+		{{/if}}
+		{{/isolate}}
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Exit</button>
+		<button id="5.6" class="btn btn-success next-block" data-dismiss="modal" aria-hidden="true">Next</button>
+	</div>
+</div>
+<!--Today I feel Modal: #6 -->
+<div id="block-6" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="counter-header" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+		<h3 id="counter-header">Today I Feel:</h3>
+	</div>
+	<div class="modal-body">
+		<form id="today_form">
+			<div class="row-fluid"><span class="span2">Happy </span>
+			<div id="happy_today" class="btn-group span4" data-toggle="buttons-radio">
+				<button type="button" class="btn btn-primary today_happy" name="today_happy" value="5">5</button>
+				<button type="button" class="btn btn-primary today_happy" name="today_happy" value="4">4</button>
+				<button type="button" class="btn btn-primary today_happy" name="today_happy" value="3">3</button>
+				<button type="button" class="btn btn-primary today_happy" name="today_happy" value="2">2</button>
+				<button type="button" class="btn btn-primary today_happy" name="today_happy" value="1">1</button>
+			</div><span class="span2 text-right"> Unhappy</span>
+			</div>
+			<div class="row-fluid"><span class="span2">Motivated </span>
+			<div id="motivated_today" class="btn-group span4" data-toggle="buttons-radio">
+				<button type="button" class="btn btn-primary today_motivated" name="today_motivated" value="5">5</button>
+				<button type="button" class="btn btn-primary today_motivated" name="today_motivated" value="4">4</button>
+				<button type="button" class="btn btn-primary today_motivated" name="today_motivated" value="3">3</button>
+				<button type="button" class="btn btn-primary today_motivated" name="today_motivated" value="2">2</button>
+				<button type="button" class="btn btn-primary today_motivated" name="today_motivated" value="1">1</button>
+			</div><span class="span2 text-right"> Unmotivated</span>
+			</div>
+			<div class="row-fluid"><span class="span2">Zen </span>
+			<div id="zen_today" class="btn-group span4" data-toggle="buttons-radio">
+				<button type="button" class="btn btn-primary today_zen" name="today_zen" value="5">5</button>
+				<button type="button" class="btn btn-primary today_zen" name="today_zen" value="4">4</button>
+				<button type="button" class="btn btn-primary today_zen" name="today_zen" value="3">3</button>
+				<button type="button" class="btn btn-primary today_zen" name="today_zen" value="2">2</button>
+				<button type="button" class="btn btn-primary today_zen" name="today_zen" value="1">1</button>
+			</div><span class="span2 text-right"> Chaos</span>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Exit</button>
+		<button id="6.7" class="btn btn-success next-block" data-dismiss="modal" aria-hidden="true">Next</button>
+	</div>
+</div>
+<!--Yesterday I felt Modal: #7 -->
+<div id="block-7" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="counter-header" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+		<h3 id="counter-header">Yesterday I Felt:</h3>
+	</div>
+	<div class="modal-body">
+		<form id="yesterday_form">
+			<div class="row-fluid"><span class="span2">Happy </span>
+			<div id="happy_yesterday" class="btn-group span4" data-toggle="buttons-radio">
+				<button type="button" class="btn btn-primary yesterday_happy" name="yesterday_happy" value="5">5</button>
+				<button type="button" class="btn btn-primary yesterday_happy" name="yesterday_happy" value="4">4</button>
+				<button type="button" class="btn btn-primary yesterday_happy" name="yesterday_happy" value="3">3</button>
+				<button type="button" class="btn btn-primary yesterday_happy" name="yesterday_happy" value="2">2</button>
+				<button type="button" class="btn btn-primary yesterday_happy" name="yesterday_happy" value="1">1</button>
+			</div><span class="span2 text-right"> Unhappy</span>
+			</div>
+			<div class="row-fluid"><span class="span2">Motivated </span>
+			<div id="motivated_yesterday" class="btn-group span4" data-toggle="buttons-radio">
+				<button type="button" class="btn btn-primary yesterday_motivated" name="yesterday_motivated" value="5">5</button>
+				<button type="button" class="btn btn-primary yesterday_motivated" name="yesterday_motivated" value="4">4</button>
+				<button type="button" class="btn btn-primary yesterday_motivated" name="yesterday_motivated" value="3">3</button>
+				<button type="button" class="btn btn-primary yesterday_motivated" name="yesterday_motivated" value="2">2</button>
+				<button type="button" class="btn btn-primary yesterday_motivated" name="yesterday_motivated" value="1">1</button>
+			</div><span class="span2 text-right"> Unmotivated</span>
+			</div>
+			<div class="row-fluid"><span class="span2">Zen </span>
+			<div id="zen_yesterday" class="btn-group span4" data-toggle="buttons-radio">
+				<button type="button" class="btn btn-primary yesterday_zen" name="yesterday_zen" value="5">5</button>
+				<button type="button" class="btn btn-primary yesterday_zen" name="yesterday_zen" value="4">4</button>
+				<button type="button" class="btn btn-primary yesterday_zen" name="yesterday_zen" value="3">3</button>
+				<button type="button" class="btn btn-primary yesterday_zen" name="yesterday_zen" value="2">2</button>
+				<button type="button" class="btn btn-primary yesterday_zen" name="yesterday_zen" value="1">1</button>
+			</div><span class="span2 text-right"> Chaos</span>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Exit</button>
+		<button id="7.0" class="btn btn-success next-block" data-dismiss="modal" aria-hidden="true">Next</button>
+	</div>
+</div>
+		
+</template>						

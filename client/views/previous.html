@@ -1,0 +1,109 @@
+<template name="previously">
+	<div id="blocks" class="span8">
+		<div class="accordion" id="previous_entries">
+		  	<div class="accordion-group">
+			    <div class="accordion-heading">
+			    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#previous_entries" href="#previous_summ">
+			        Previous Summaries
+			      	</a>
+			    </div>
+			    <div id="previous_summ" class="accordion-body collapse in">
+			      	<div class="accordion-inner">
+			        	<table class="table table-bordered table-condensed">
+							<thead>
+								<tr>
+									<th>Date:</td>
+									<th>Summary:</td>
+								</tr>
+							</thead>		
+					  		{{#each previous_summ}}
+							<tr>
+								<td class="summ_date">{{create_date}}</td>
+								<td class="summ_text">{{summary}}</td>
+							</tr>
+					  		{{/each}}	
+				    	</table>  	
+			      	</div>
+			    </div>  
+			</div>	
+		  	<div class="accordion-group">
+		    	<div class="accordion-heading">
+		      		<a class="accordion-toggle" data-toggle="collapse" data-parent="#previous_entries" href="#previous_tasks">
+		        	Completed Tasks
+		     		</a>
+		    	</div>
+		    	<div id="previous_tasks" class="accordion-body collapse in">
+		      		<div class="accordion-inner">
+			        	<table class="table table-bordered table-condensed">
+							<thead>
+								<tr>
+									<th class="task_date">Created:</td>
+									<th class="task_completed">Completed:</td>
+									<th class="task_text">Task:</td>
+								</tr>
+							</thead>	
+				  			{{#each previous_task}}
+							<tr>
+								<td class="task_date">{{create_date}}</td>
+								<td class="task_completed">{{last_date}}</td>
+								<td class="task_text">{{task}}</td>
+							</tr>
+				  			{{/each}}	
+			    		</table>  	
+		      		</div>
+		    	</div>  
+		  	</div>
+		  	<div class="accordion-group">
+			    <div class="accordion-heading">
+			    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#previous_entries" href="#previous_grateful">
+			        Previous Gratitudes
+			      	</a>
+			    </div>
+			    <div id="previous_grateful" class="accordion-body collapse in">
+			      	<div class="accordion-inner">
+			        	<table class="table table-bordered table-condensed">
+							<thead>
+								<tr>
+									<th class="summ_date">Date:</td>
+									<th class="summ_text">Gratitude:</td>
+								</tr>
+							</thead>	
+					  		{{#each previous_grateful}}
+							<tr>
+								<td class="summ_date">{{create_date}}</td>
+								<td class="summ_text">{{item}}</td>
+							</tr>
+					  		{{/each}}	
+				    	</table>  	
+			      	</div>
+			    </div>  
+			</div>
+			<div class="accordion-group">
+			    <div class="accordion-heading">
+			    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#previous_entries" href="#previous_counter">
+			        Previous Gratitudes
+			      	</a>
+			    </div>
+			    <div id="previous_counter" class="accordion-body collapse in">
+			      	<div class="accordion-inner">
+			        	<table class="table table-bordered table-condensed">
+							<thead>
+								<tr>
+									<th class="summ_date">Date:</td>
+									<th class="summ_text">Counter Factual:</td>
+								</tr>
+							</thead>	
+					  		{{#each previous_counter}}
+							<tr>
+								<td class="summ_date">{{create_date}}</td>
+								<td class="summ_text">{{item}}</td>
+							</tr>
+					  		{{/each}}	
+				    	</table>  	
+			      	</div>
+			    </div>  
+			</div>
+		</div>
+	</div>
+</template>					
+		

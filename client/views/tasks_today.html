@@ -1,10 +1,7 @@
 <template name="tasks_today">
 	<div class="span8 better-block">
-		<div class="alert hidden">
-		  <button type="button" class="close" data-dismiss="alert">&times;</button>
-		  <strong>Warning!</strong> Best check yo self, you're not looking too good.
-		</div>
-		<h4 class="page-header">Today's Tasks:</h4>
+		<h4 id="today-task-header" class="page-header" data-toggle="collapse" data-target="#todays_tasks">Today's Tasks:</h4>
+		<div id="todays_tasks" class="collapse in">
 		<div class="span4">
 		<table class="table table-bordered">
 			{{#each today}}
@@ -20,5 +17,6 @@
 		  <button class="btn" id="add-task">Add</button>
 		</div>
 		{{/if}}
+		</div>
 	</div>	
 </template>

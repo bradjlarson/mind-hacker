@@ -1,33 +1,33 @@
 <template name="today_i_feel">
 	<div class="span8 better-block">
-		<h4 class="page-header">Today I Feel:</h4>
-		<form>
-			<div id="happy_today">
-				<label class="radio inline">Happy-&gt;</label>				
-				<label class="radio inline"><input type="radio" name="today_happy" value="5"></label>
-				<label class="radio inline"><input type="radio" name="today_happy" value="4"></label>
-				<label class="radio inline"><input type="radio" name="today_happy" value="3"></label>
-				<label class="radio inline"><input type="radio" name="today_happy" value="2"></label>
-				<label class="radio inline"><input type="radio" name="today_happy" value="1"></label>
-				<label class="radio inline">&lt;-Unappy</label>
+		<h4 id="today-survey-header" class="page-header" data-toggle="collapse" data-target="#today_form">Today I Feel:</h4>
+		<form id="today_form" class="collapse in">
+			<div class="row-fluid"><span class="span2">Happy </span>
+			<div id="happy_today" class="btn-group span3" data-toggle="buttons-radio">
+				<button type="button" class="btn btn-primary today_happy" name="today_happy" value="5">5</button>
+				<button type="button" class="btn btn-primary today_happy" name="today_happy" value="4">4</button>
+				<button type="button" class="btn btn-primary today_happy" name="today_happy" value="3">3</button>
+				<button type="button" class="btn btn-primary today_happy" name="today_happy" value="2">2</button>
+				<button type="button" class="btn btn-primary today_happy" name="today_happy" value="1">1</button>
+			</div><span class="span2 text-right"> Unhappy</span>
 			</div>
-			<div>
-				<label class="radio inline">Motivated-&gt;</label>	
-				<label class="radio inline"><input type="radio" name="today_motivated" value="5"></label>
-				<label class="radio inline"><input type="radio" name="today_motivated" value="4"></label>
-				<label class="radio inline"><input type="radio" name="today_motivated" value="3"></label>
-				<label class="radio inline"><input type="radio" name="today_motivated" value="2"></label>
-				<label class="radio inline"><input type="radio" name="today_motivated" value="1"></label>
-				<label class="radio inline">&lt;-Unmotivated</label>
+			<div class="row-fluid"><span class="span2">Motivated </span>
+			<div id="motivated_today" class="btn-group span3" data-toggle="buttons-radio">
+				<button type="button" class="btn btn-primary today_motivated" name="today_motivated" value="5">5</button>
+				<button type="button" class="btn btn-primary today_motivated" name="today_motivated" value="4">4</button>
+				<button type="button" class="btn btn-primary today_motivated" name="today_motivated" value="3">3</button>
+				<button type="button" class="btn btn-primary today_motivated" name="today_motivated" value="2">2</button>
+				<button type="button" class="btn btn-primary today_motivated" name="today_motivated" value="1">1</button>
+			</div><span class="span2 text-right"> Unmotivated</span>
 			</div>
-			<div>
-				<label class="radio inline">Zen-&gt;</label>
-				<label class="radio inline"><input type="radio" name="today_zen" value="5"></label>
-				<label class="radio inline"><input type="radio" name="today_zen" value="4"></label>
-				<label class="radio inline"><input type="radio" name="today_zen" value="3"></label>
-				<label class="radio inline"><input type="radio" name="today_zen" value="2"></label>
-				<label class="radio inline"><input type="radio" name="today_zen" value="1"></label>
-				<label class="radio inline">&lt;-Chaos</label>
+			<div class="row-fluid"><span class="span2">Zen </span>
+			<div id="zen_today" class="btn-group span3" data-toggle="buttons-radio">
+				<button type="button" class="btn btn-primary today_zen" name="today_zen" value="5">5</button>
+				<button type="button" class="btn btn-primary today_zen" name="today_zen" value="4">4</button>
+				<button type="button" class="btn btn-primary today_zen" name="today_zen" value="3">3</button>
+				<button type="button" class="btn btn-primary today_zen" name="today_zen" value="2">2</button>
+				<button type="button" class="btn btn-primary today_zen" name="today_zen" value="1">1</button>
+			</div><span class="span2 text-right"> Chaos</span>
 			</div>
 		</form>
 	</div>

@@ -4,7 +4,7 @@ Template.tasks_today.today = function() {
 
 Template.tasks_today.today_check = function() {
 	var todays = tasks.find({complete : false});
-	if (todays.count() <5)
+	if (todays.count() <3)
 	{
 		return true;
 		Session.set("today_done", false);
@@ -13,6 +13,10 @@ Template.tasks_today.today_check = function() {
 	{
 		return false;
 		Session.set("today_done", true);
+		$('#todays_tasks').collapse('hide');
+		$('#gratefuls').collapse('show');
+		$("#today-task-header").addClass("text-success");
+		console.log('today done');
 	}
 };
 

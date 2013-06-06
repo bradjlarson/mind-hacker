@@ -20,6 +20,10 @@ Template.summ_yesterday.events = {
 		//Code to add readonly input to textarea
 		//change summary background to green alert (alert-success)
 		//Add green check mark after better block header (maybe make a function for this)
+		$("#summ-yest-header").addClass("text-success");
+		$("#summary").collapse('hide');
+		$("#yesterdays_tasks").collapse('show');
+		console.log("summary submitted");
 	}
 };
 

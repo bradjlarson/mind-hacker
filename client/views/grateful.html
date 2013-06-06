@@ -4,8 +4,9 @@
 		  <button type="button" class="close" data-dismiss="alert alert-success">&times;</button>
 		  <strong>Success!</strong> Gratitude(s) Saved.
 		</div>
-		<h4 class="page-header">3 Things I am grateful for:</h4>
-		<div class="span4">
+		<h4 id="grateful-header" class="page-header" data-toggle="collapse" data-target="#gratefuls">3 Things I am grateful for:</h4>
+		<div id="gratefuls" class="collapse in">
+		<div class="span4">	
 		<table class="table table-bordered">
 		{{#each gratitude}}
 			<tr>
@@ -13,12 +14,16 @@
 			</tr>
 		{{/each}}
 		</table>
-		</div>		
+		</div>
+		{{#isolate}}		
 		{{#if grateful_check}}
 		<div class="input-append span8">
 		  <input id="todays-gratitude" type="text">
 		  <button class="btn" id="add_gratitude">Add</button>
 		</div>	
 		{{/if}}
+		{{/isolate}}
+		</div>
 	</div>	
 </template>
+	

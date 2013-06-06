@@ -1,7 +1,7 @@
 <template name="tasks_yesterday">
 	<div class="span8 better-block">
-		<h4 class="page-header">Yesterdays Tasks:</h4>
-		<div class="span5">
+		<h4 id="yesterday-task-header" class="page-header" data-toggle="collapse" data-target="#yesterdays_tasks">Yesterday's Tasks:</h4>
+		<div id="yesterdays_tasks" class="span5 collapse in">
 		<table class="table table-bordered">
 		{{#each yesterday}}
 			<tr>

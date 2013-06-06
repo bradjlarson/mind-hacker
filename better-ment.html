@@ -3,19 +3,21 @@
 </head>
 
 <body>
-	<div class="container">
+	<div>
 		{{> splash}}
 	</div>
 </body>
 
 <template name="todayis">
-	<div class="span8">
+<div class="row-fluid span10">	
+	<div class="span6">
 		<h3 class="page-header pull-left">BetterMe</h3>
 		<h3 class="page-header pull-right">Today is: {{today}} @ {{now}} </h3>
 	</div>
-	<div class="span8">
-		<div class="pull-right">{{loginButtons}}</div>
-	</div>	
+	<div class="span2">
+		<div class="pull-right"><h6 class="">{{loginButtons}}</h6></div>
+	</div>
+</div>		
 </template>
 
 <template name="login_beta">
@@ -28,22 +30,56 @@
 	</div>
 </template>	
 <template name="splash">
+	<!--
+		Right now the better blocks are hard coded
+		However, in the future the goal is to have a modular architecture, 
+		allowing people to customize which better blocks they are using on the fly.
+		It will probably utilize a blocks collections, which stores {user_id, block_template_name, order,
+		block_specific_settings, block_
+	-->
 	{{#if logged_out}}
 		{{> login_beta}}
 	{{/if}}	
 	{{#if logged_in}}
-		{{> todayis}}
-		{{> summ_yesterday}}
-		{{> tasks_yesterday}}
-		{{> tasks_today}}
-		{{> grateful}}
-		{{> counter_factual}}
-		{{> today_i_feel}}
-		{{> yesterday_i_felt}}
+		{{#if today_not_done}}
+			{{> better_blocks}}
+			{{> todayis}}
+			{{> summ_yesterday}}
+			{{> tasks_yesterday}}
+			{{> tasks_today}}
+			{{> grateful}}
+			{{> counter_factual}}
+			{{> today_i_feel}}
+			{{> yesterday_i_felt}}
+		{{else}}
+			<div class="clearfix">
+			{{> better_blocks}}
+			{{> todayis}}
+			</div>
+			<div class="container-fluid">
+				<div class="span2">
+					{{> side_bar}}
+				</div>
+				<div id="main" class="span6">		
+					{{> today_main}}
+				</div>
+			</div>		
+		{{/if}}	
 	{{/if}}
 </template>	
 
-
+<template name="side_bar">
+	<div class="tabbable tabs-left">
+		<ul class="nav nav-tabs">
+			<li id="launch_about"><a href="#about" data-toggle="tab">About</a></li>
+			<li class="active" id="launch_today"><a href="#today" data-toggle="tab">Today</a></li>
+			<li id="launch_previous"><a href="#previously"  data-toggle="tab">Previously</a></li>
+			<li id="launch_progress"><a href="#progress" data-toggle="tab">Progress</a></li>	
+			<li id="launch_settings"><a href="#settings"data-toggle="tab">Settings</a></li>				
+			<li id="launch_contact"><a href="#contact" data-toggle="tab">Contact</a></li>	
+		</ul>
+	</div>
+</template>	
 
 
 		

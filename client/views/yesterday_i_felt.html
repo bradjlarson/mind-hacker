@@ -1,33 +1,33 @@
 <template name="yesterday_i_felt">
 	<div class="span8 better-block">
-		<h4 class="page-header">Yesterday I Felt:</h4>
-		<form>
-			<div>
-				<label class="radio inline">Happy-&gt;</label>				
-				<label class="radio inline"><input type="radio" name="yesterday_happy" value="5"></label>
-				<label class="radio inline"><input type="radio" name="yesterday_happy" value="4"></label>
-				<label class="radio inline"><input type="radio" name="yesterday_happy" value="3"></label>
-				<label class="radio inline"><input type="radio" name="yesterday_happy" value="2"></label>
-				<label class="radio inline"><input type="radio" name="yesterday_happy" value="1"></label>
-				<label class="radio inline">&lt;-Unappy</label>
+		<h4 id="yesterday-survey-header" class="page-header" data-toggle="collapse" data-target="#yesterday_form">Yesterday I Felt:</h4>
+		<form id="yesterday_form" class="collapse in">
+			<div class="row-fluid"><span class="span2">Happy </span>
+			<div id="happy_yesterday" class="btn-group span3" data-toggle="buttons-radio">
+				<button type="button" class="btn btn-primary yesterday_happy" name="yesterday_happy" value="5">5</button>
+				<button type="button" class="btn btn-primary yesterday_happy" name="yesterday_happy" value="4">4</button>
+				<button type="button" class="btn btn-primary yesterday_happy" name="yesterday_happy" value="3">3</button>
+				<button type="button" class="btn btn-primary yesterday_happy" name="yesterday_happy" value="2">2</button>
+				<button type="button" class="btn btn-primary yesterday_happy" name="yesterday_happy" value="1">1</button>
+			</div><span class="span2 text-right"> Unhappy</span>
 			</div>
-			<div>
-				<label class="radio inline">Motivated-&gt;</label>	
-				<label class="radio inline"><input type="radio" name="yesterday_motivated" value="5"></label>
-				<label class="radio inline"><input type="radio" name="yesterday_motivated" value="4"></label>
-				<label class="radio inline"><input type="radio" name="yesterday_motivated" value="3"></label>
-				<label class="radio inline"><input type="radio" name="yesterday_motivated" value="2"></label>
-				<label class="radio inline"><input type="radio" name="yesterday_motivated" value="1"></label>
-				<label class="radio inline">&lt;-Unmotivated</label>
+			<div class="row-fluid"><span class="span2">Motivated </span>
+			<div id="motivated_yesterday" class="btn-group span3" data-toggle="buttons-radio">
+				<button type="button" class="btn btn-primary yesterday_motivated" name="yesterday_motivated" value="5">5</button>
+				<button type="button" class="btn btn-primary yesterday_motivated" name="yesterday_motivated" value="4">4</button>
+				<button type="button" class="btn btn-primary yesterday_motivated" name="yesterday_motivated" value="3">3</button>
+				<button type="button" class="btn btn-primary yesterday_motivated" name="yesterday_motivated" value="2">2</button>
+				<button type="button" class="btn btn-primary yesterday_motivated" name="yesterday_motivated" value="1">1</button>
+			</div><span class="span2 text-right"> Unmotivated</span>
 			</div>
-			<div>
-				<label class="radio inline">Zen-&gt;</label>
-				<label class="radio inline"><input type="radio" name="yesterday_zen" value="5"></label>
-				<label class="radio inline"><input type="radio" name="yesterday_zen" value="4"></label>
-				<label class="radio inline"><input type="radio" name="yesterday_zen" value="3"></label>
-				<label class="radio inline"><input type="radio" name="yesterday_zen" value="2"></label>
-				<label class="radio inline"><input type="radio" name="yesterday_zen" value="1"></label>
-				<label class="radio inline">&lt;-Chaos</label>
+			<div class="row-fluid"><span class="span2">Zen </span>
+			<div id="zen_yesterday" class="btn-group span3" data-toggle="buttons-radio">
+				<button type="button" class="btn btn-primary yesterday_zen" name="yesterday_zen" value="5">5</button>
+				<button type="button" class="btn btn-primary yesterday_zen" name="yesterday_zen" value="4">4</button>
+				<button type="button" class="btn btn-primary yesterday_zen" name="yesterday_zen" value="3">3</button>
+				<button type="button" class="btn btn-primary yesterday_zen" name="yesterday_zen" value="2">2</button>
+				<button type="button" class="btn btn-primary yesterday_zen" name="yesterday_zen" value="1">1</button>
+			</div><span class="span2 text-right"> Chaos</span>
 			</div>
 		</form>
 	</div>
