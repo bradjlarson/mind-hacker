@@ -1,4 +1,14 @@
-
+Template.better_blocks.today_add = function() {
+	var today_count = tasks.find({last_date : Session.get("today"), complete : false}).count();
+	if (today_count < 3)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+};
 
 Template.better_blocks.previous = function() {
 	var today_check = summaries.find({create_date : Session.get("today")});

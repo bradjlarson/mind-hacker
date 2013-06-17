@@ -47,6 +47,12 @@
 	</div>
 	<div class="modal-body">
 		<div id="summary">
+			{{#isolate}}
+			<div id="summ_tip" class="alert better-tip alert-info">
+			  	<button type="button" class="close" data-dismiss="alert">&times;</button>
+			  	<strong>Tip: Try writing chronologically, going from morning to evening.</strong>
+			</div>
+			{{/isolate}}
 			<textarea id="summ-yest" placeholder="Yesterday I..." class="span5" rows="15">{{#if previous}}{{summary}}{{/if}}</textarea>
 		</div>
 	</div>
@@ -62,6 +68,12 @@
 		<h4 id="tasks-yesterday-header" >Yesterday's Tasks:</h4>
 	</div>
 	<div class="modal-body">
+		{{#isolate}}
+		<div id="yesterday_tip" class="alert better-tip alert-info">
+		  	<button type="button" class="close" data-dismiss="alert">&times;</button>
+		  	<strong>Tip: Mark yesterdays tasks as done or not done (not done tasks carryover to today).</strong>
+		</div>
+		{{/isolate}}
 		<div id="yesterdays_tasks" class="span5">
 			<table class="table table-bordered">
 			{{#isolate}}	
@@ -94,6 +106,16 @@
 	</div>
 	<div class="modal-body">
 		{{#isolate}}
+		<div id="today_tip" class="alert better-tip alert-info">
+		  	<button type="button" class="close" data-dismiss="alert">&times;</button>
+			{{#if today_check}}
+		  	<strong>Tip: Add some more tasks for today - you can have up to 3.</strong>
+			{{else}}
+			<strong>Tip: You've already got 3 tasks for today, click next to continue</strong>
+			{{/if}}
+		</div>
+		{{/isolate}}
+		{{#isolate}}
 		<div class="span4">
 			<table class="table table-bordered">
 				{{#each today}}
@@ -123,6 +145,12 @@
 		<h4 id="grateful-header">3 Things I am grateful for:</h4>
 	</div>
 	<div class="modal-body">
+		{{#isolate}}
+		<div id="grateful_tip" class="alert better-tip alert-info">
+		  	<button type="button" class="close" data-dismiss="alert">&times;</button>
+		  	<strong>Tip: Try to be specific. You'll get more out of it.</strong>
+		</div>
+		{{/isolate}}
 		{{#isolate}}
 		<div class="span4">
 			<table class="table table-bordered">
@@ -154,6 +182,12 @@
 	</div>
 	<div class="modal-body">
 		{{#isolate}}
+		<div id="counter_tip" class="alert better-tip alert-info">
+		  	<button type="button" class="close" data-dismiss="alert">&times;</button>
+		  	<strong>Tip: If you could re-do yesterday, what would you change?</strong>
+		</div>
+		{{/isolate}}
+		{{#isolate}}
 		<div class="span4">
 		<table class="table table-bordered">
 		{{#each counter_fact}}
@@ -183,6 +217,12 @@
 		<h4 id="counter-header">Today I Feel:</h4>
 	</div>
 	<div class="modal-body">
+		{{#isolate}}
+		<div id="today_feel_tip" class="alert better-tip alert-info">
+		  	<button type="button" class="close" data-dismiss="alert">&times;</button>
+		  	<strong>Tip: How do you feel right now?</strong>
+		</div>
+		{{/isolate}}
 		<form id="today_form">
 			<div class="row-fluid"><span class="span2">Happy </span>
 			<div id="happy_today" class="btn-group span4" data-toggle="buttons-radio">
@@ -225,6 +265,12 @@
 		<h4 id="counter-header">Yesterday I Felt:</h4>
 	</div>
 	<div class="modal-body">
+		{{#isolate}}
+		<div id="today_feel_tip" class="alert better-tip alert-info">
+		  	<button type="button" class="close" data-dismiss="alert">&times;</button>
+		  	<strong>Tip: Overall, how would you rate yesterday?</strong>
+		</div>
+		{{/isolate}}
 		<form id="yesterday_form">
 			<div class="row-fluid"><span class="span2">Happy </span>
 			<div id="happy_yesterday" class="btn-group span4" data-toggle="buttons-radio">
