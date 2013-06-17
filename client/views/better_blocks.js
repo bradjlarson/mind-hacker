@@ -13,6 +13,23 @@ Template.better_blocks.previous = function() {
 	return Session.get("todays_summary");
 };
 
+Template.better_blocks.greeting = function() {
+	var time = Session.get("now");
+	var hour = time.slice(0,2);
+	if (hour >= 17)
+	{
+		return "Good evening!";
+	}
+	else if(hour >= 12)
+	{
+		return "Good afternoon!";
+	}
+	else
+	{
+		return "Good morning!";
+	}
+}
+
 Template.better_blocks.summary = function() {
 	return summaries.find({create_date : Session.get("today")}, {$sort : {create_time : 1}}).fetch()[0]['summary'];
 };
@@ -190,7 +207,7 @@ Template.better_blocks.events = {
 			var survey_id = today_check.fetch()[0]['_id'];
 			console.log(survey_id);
 			console.log(input_val);
-			surveys.update(survey_id, {$set : {today_happy : input_val}});
+			surveys.update(survey_id, {$set : {yesterday_happy : input_val}});
 		}
 		else
 		{
@@ -205,7 +222,7 @@ Template.better_blocks.events = {
 			var survey_id = today_check.fetch()[0]['_id'];
 			console.log(survey_id);
 			console.log(input_val);
-			surveys.update(survey_id, {$set : {today_motivated : input_val}});
+			surveys.update(survey_id, {$set : {yesterday_motivated : input_val}});
 		}
 		else
 		{
@@ -220,21 +237,32 @@ Template.better_blocks.events = {
 			var survey_id = today_check.fetch()[0]['_id'];
 			console.log(survey_id);
 			console.log(input_val);
-			surveys.update(survey_id, {$set : {today_zen : input_val}});
+			surveys.update(survey_id, {$set : {yesterday_zen : input_val}});
 		}
 		else
 		{
-			surveys.insert({create_date : Session.get("today"), create_time : Session.get("now"), user_id : Meteor.userId(), yesterday_zen : input_val});
+			surveys.insert({create_date : Session.get("today"), yesterday : Session.get("yesterday"), create_time : Session.get("now"), user_id : Meteor.userId(), yesterday_zen : input_val});
 		}
+	},
+	'click .start-block' : function(event) {
+		var input_id = $(event.target).attr("id");
+		Session.set("block_intro", true);
+		block_manager(input_id);
+		//done.insert({create_time : Session.get("now"), create_date : Session.get("today"), block_id : input_id, user_id : Meteor.userId()});
 	},
 	'click .next-block' : function(event) {
 		var input_id = $(event.target).attr("id");
 		block_manager(input_id);
 		done.insert({create_time : Session.get("now"), create_date : Session.get("today"), block_id : input_id, user_id : Meteor.userId()});
+	},
+	'click .previous-block' : function(event) {
+		var input_id = $(event.target).attr("name");
+		block_manager(input_id);
+		done.insert({create_time : Session.get("now"), create_date : Session.get("today"), block_id : input_id, user_id : Meteor.userId()});
 	}	
 };
 
-
+/*
 Template.better_blocks.rendered = function() {
 	if (Session.get("done_load"))
 	{
@@ -244,13 +272,41 @@ Template.better_blocks.rendered = function() {
 		console.log(current_block);
 		if (num_done < 7)
 		{
-			$("#block-"+current_block).modal('show');
-			console.log('rendered')
+			if (Session.get("block_intro"))
+			{
+				$("#block-"+current_block).modal('show');
+			}
+			else
+			{
+				$('#block-0').modal('show');
+			}
 		}
 	}
 }
+*/
 
-function block_manager(block_id) {
+block_show = function() {
+	if (Session.get("done_load"))
+	{
+		var num_done = done.find({create_date : Session.get("today")}).count();
+		console.log(num_done);
+		var current_block = num_done + 1;
+		console.log(current_block);
+		if (num_done < 7)
+		{
+			if (Session.get("block_intro"))
+			{
+				$("#block-"+current_block).modal('show');
+			}
+			else
+			{
+				$('#block-0').modal('show');
+			}
+		}
+	}
+};
+
+block_manager = function(block_id) {
 	var parts = block_id.split(".");
 	$("#block-"+parts[0]).modal('hide');
 	if (parts[1])
@@ -258,4 +314,4 @@ function block_manager(block_id) {
 		$("#block-"+parts[1]).modal('show');
 	}
 	console.log(block_id+"marked as done");
-}
+};

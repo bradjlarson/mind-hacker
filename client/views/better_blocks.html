@@ -4,7 +4,7 @@
 		<div id="{{block_name}}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="{{header_name}}" aria-hidden="true">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-				<h3 id="{{header_name}}">{{block_header}}</h3>
+				<h4 id="{{header_name}}">{{block_header}}</h4>
 			</div>
 			<div class="modal-body">
 				{{block_body}}
@@ -17,22 +17,41 @@
 	{{/each}}
 -->
 	
-<!--This section contains hard coded modals, it will be removed after the modular system is perfected -->
-<!--summ-yest Modal: #1 -->
+<!--This section contains hard coded modals, it will be removed after the modular system is perfected 
+	I think I am also going to add an introduction modal
+	I'm also going to add alerts to each modal that tells the user what to do...
+-->
 
-<div id="block-1" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="counter-header" aria-hidden="true">
+<!--Introduction Modal: #0 -->
+<div id="block-0" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="counter-header" aria-hidden="true">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-		<h3 id="summ-yest-header">Short Summary of Yesterday:</h3>
+		<h4 id="intro-header">{{greeting}}</h4>
 	</div>
 	<div class="modal-body">
 		<div id="summary">
-			<textarea id="summ-yest" placeholder="Yesterday I..." class="span5" rows="15">{{#if previous}}{{summary}}{{/if}}	
-			</textarea>
+			<p>Are you ready to complete today's better blocks? Click Begin to get started...</p>
 		</div>
 	</div>
 	<div class="modal-footer">
-		<button class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Exit</button>
+		<button class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Later</button>
+		<button id="0.1" class="btn btn-success start-block" data-dismiss="modal" aria-hidden="true">Begin</button>
+	</div>
+</div>
+
+<!--summ-yest Modal: #1 -->
+<div id="block-1" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="counter-header" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+		<h4 id="summ-yest-header">Short Summary of Yesterday:</h4>
+	</div>
+	<div class="modal-body">
+		<div id="summary">
+			<textarea id="summ-yest" placeholder="Yesterday I..." class="span5" rows="15">{{#if previous}}{{summary}}{{/if}}</textarea>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button name="1.0" class="btn btn-inverse previous-block" data-dismiss="modal" aria-hidden="true">Previous</button>
 		<button id="1.2" class="btn btn-success next-block" data-dismiss="modal" aria-hidden="true">Next</button>
 	</div>
 </div>
@@ -40,7 +59,7 @@
 <div id="block-2" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="counter-header" aria-hidden="true">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-		<h3 id="tasks-yesterday-header" >Yesterday's Tasks:</h3>
+		<h4 id="tasks-yesterday-header" >Yesterday's Tasks:</h4>
 	</div>
 	<div class="modal-body">
 		<div id="yesterdays_tasks" class="span5">
@@ -63,7 +82,7 @@
 		</div>
 	</div>
 	<div class="modal-footer">
-		<button class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Exit</button>
+		<button name="2.1" class="btn btn-inverse previous-block" data-dismiss="modal" aria-hidden="true">Previous</button>
 		<button id="2.3" class="btn btn-success next-block" data-dismiss="modal" aria-hidden="true">Next</button>
 	</div>
 </div>
@@ -71,7 +90,7 @@
 <div id="block-3" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="counter-header" aria-hidden="true">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-		<h3 id="today-tasks-header">Today's Tasks:</h3>
+		<h4 id="today-tasks-header">Today's Tasks:</h4>
 	</div>
 	<div class="modal-body">
 		{{#isolate}}
@@ -86,14 +105,14 @@
 		</div>	
 		{{#if today_check}}
 			<div class="input-append span4">
-				<input id="todays-task" type="text">
+				<input id="todays-task" type="text" class="span4">
 			  	<button class="btn" id="add-task">Add</button>
 			</div>
 		{{/if}}
 		{{/isolate}}
 	</div>
 	<div class="modal-footer">
-		<button class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Exit</button>
+		<button name="3.2" class="btn btn-inverse previous-block" data-dismiss="modal" aria-hidden="true">Previous</button>
 		<button id="3.4" class="btn btn-success next-block" data-dismiss="modal" aria-hidden="true">Next</button>
 	</div>
 </div>
@@ -101,7 +120,7 @@
 <div id="block-4" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="counter-header" aria-hidden="true">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-		<h3 id="grateful-header">3 Things I am grateful for:</h3>
+		<h4 id="grateful-header">3 Things I am grateful for:</h4>
 	</div>
 	<div class="modal-body">
 		{{#isolate}}
@@ -116,14 +135,14 @@
 		</div>		
 		{{#if grateful_check}}
 		<div class="input-append span4">
-			<input id="todays-gratitude" type="text">
+			<input id="todays-gratitude" type="text" class="span4">
 			<button class="btn" id="add_gratitude">Add</button>
 		</div>	
 		{{/if}}
 		{{/isolate}}
 	</div>
 	<div class="modal-footer">
-		<button class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Exit</button>
+		<button name="4.3" class="btn btn-inverse previous-block" data-dismiss="modal" aria-hidden="true">Previous</button>
 		<button id="4.5" class="btn btn-success next-block" data-dismiss="modal" aria-hidden="true">Next</button>
 	</div>
 </div>
@@ -131,7 +150,7 @@
 <div id="block-5" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="counter-header" aria-hidden="true">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-		<h3 id="counter-header">3 Things I could have done better yesterday:</h3>
+		<h4 id="counter-header">3 Things I could have done better yesterday:</h4>
 	</div>
 	<div class="modal-body">
 		{{#isolate}}
@@ -146,14 +165,14 @@
 		</div>		
 		{{#if counter_check}}
 		<div class="input-append span4">
-		  <input id="todays-counterfact" type="text">
+		  <input id="todays-counterfact" type="text" class="span4">
 		  <button class="btn" id="add-counterfact">Add</button>
 		</div>	
 		{{/if}}
 		{{/isolate}}
 	</div>
 	<div class="modal-footer">
-		<button class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Exit</button>
+		<button name="5.4" class="btn btn-inverse previous-block" data-dismiss="modal" aria-hidden="true">Previous</button>
 		<button id="5.6" class="btn btn-success next-block" data-dismiss="modal" aria-hidden="true">Next</button>
 	</div>
 </div>
@@ -161,7 +180,7 @@
 <div id="block-6" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="counter-header" aria-hidden="true">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-		<h3 id="counter-header">Today I Feel:</h3>
+		<h4 id="counter-header">Today I Feel:</h4>
 	</div>
 	<div class="modal-body">
 		<form id="today_form">
@@ -195,7 +214,7 @@
 		</form>
 	</div>
 	<div class="modal-footer">
-		<button class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Exit</button>
+		<button name="6.5" class="btn btn-inverse previous-block" data-dismiss="modal" aria-hidden="true">Previous</button>
 		<button id="6.7" class="btn btn-success next-block" data-dismiss="modal" aria-hidden="true">Next</button>
 	</div>
 </div>
@@ -203,7 +222,7 @@
 <div id="block-7" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="counter-header" aria-hidden="true">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-		<h3 id="counter-header">Yesterday I Felt:</h3>
+		<h4 id="counter-header">Yesterday I Felt:</h4>
 	</div>
 	<div class="modal-body">
 		<form id="yesterday_form">
@@ -237,7 +256,7 @@
 		</form>
 	</div>
 	<div class="modal-footer">
-		<button class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Exit</button>
+		<button name="7.6" class="btn btn-inverse previous-block" data-dismiss="modal" aria-hidden="true">Previous</button>
 		<button id="7.0" class="btn btn-success next-block" data-dismiss="modal" aria-hidden="true">Next</button>
 	</div>
 </div>

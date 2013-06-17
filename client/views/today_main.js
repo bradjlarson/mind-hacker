@@ -20,3 +20,7 @@ Template.today_main.grateful = function() {
 Template.today_main.counterfact = function() {
 	return counterfact.find({create_date : Session.get("today")});
 };
+
+Template.today_main.rendered = function() {
+	block_show();
+}

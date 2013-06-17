@@ -8,6 +8,7 @@ counterfact = new Meteor.Collection("counterfact");
 blocks = new Meteor.Collection("blocks");
 about = new Meteor.Collection("about");
 contact = new Meteor.Collection("contact");
+export_docs = new Meteor.Collection("export_docs");
 
 if (Meteor.isServer)
 {
@@ -47,6 +48,11 @@ Meteor.publish("Contact", function() {
 	return contact.find({user_id : this.userId});
 });
 
+Meteor.publish("Export", function() {
+	return export_docs.find({user_id : this.userId});
+});
+
+
 Meteor.methods({
 	'update_records' : function() {
 	tasks.update({}, {$set : {user_id : this.userId}}, {multi : true});
@@ -83,6 +89,7 @@ Meteor.subscribe("Counterfact");
 Meteor.subscribe("Blocks");
 Meteor.subscribe("About");
 Meteor.subscribe("Contact");
+Meteor.subscribe("Export");
 	
 //setTimeout(function(){var today = new Date(); Session.set("now", today.timeNow_is());}, 1000);
 	
@@ -90,13 +97,14 @@ Meteor.startup(function() {
 	var today = new Date();
 	Session.setDefault("today", today.today_is());
 	Session.setDefault("now", today.timeNow_is());
+	Session.setDefault("block_intro", false);
 	today.setDate(today.getDate()-1);
 	Session.setDefault("yesterday", today.today_is());
 	//Session.setDefault("todays_summary", false);
 });
 
 Date.prototype.today_is = function(){ 
-	console.log(this.getDate());
+	//console.log(this.getDate());
     return (((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) +"/"+((this.getDate() < 10)?"0":"") + this.getDate() +"/"+ this.getFullYear() 
 };
 //For the time now
@@ -105,19 +113,40 @@ Date.prototype.timeNow_is = function(){
 };
 
 Date.prototype.yesterday = function(){ 
-	console.log(this.getDate());
+	//console.log(this.getDate());
     return (((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) +"/"+((this.getDate() < 10)?"0":"") + this.getDate() +"/"+ this.getFullYear() 
 };
 
 
 Template.todayis.today = function() {
 	var today = new Date();
-	Session.set("today", today.today_is());
+	var today_update = today.today_is();
 	Session.set("now", today.timeNow_is());
+	if (Session.get("today") != today_update)
+	{
+		console.log("today updated");
+		console.log(Session.get("today"));
+		console.log(today_update);
+		Session.set("today", today.today_is());
+		today.setDate(today.getDate()-1);
+		Session.set("yesterday", today.today_is());
+	}
 	return Session.get("today");
 };
 Template.todayis.now = function() {
 	return Session.get("now");
+};
+
+Template.todayis.events = {
+	'click .return-to-main' : function() {
+		$('#main').html(Meteor.render(Template.today_main));
+		$('.side-nav').removeClass("active");
+		$('#launch_today').addClass("active");
+		Template.todayis.today();
+		block_show();
+		console.log('today');
+		//today_better_check();
+	}
 };
 
 Template.splash.today_done = function() {
@@ -147,23 +176,36 @@ Template.splash.logged_in = function() {
 Template.side_bar.events = {
 	'click #launch_about' : function() {
 		$('#main').html(Meteor.render(Template.about));
+		Template.todayis.today();
 		console.log('main');},
 	'click #launch_today' : function() {
 		$('#main').html(Meteor.render(Template.today_main));
+		Template.todayis.today();
+		block_show();
 		console.log('today');
-		today_better_check();},
+		//today_better_check();
+		},
 	'click #launch_previous' : function(event) {
 		$('#main').html(Meteor.render(Template.previously));
+		Template.todayis.today();
 		console.log('previously');},
 	'click #launch_progress' : function(event) {
-		//$('#main').html(Meteor.render(Template.progress));
+		$('#main').html(Meteor.render(Template.progress));
+		Template.todayis.today();
 		console.log('progress');},
 	'click #launch_settings' : function(event) {
 		$('#main').html(Meteor.render(Template.settings));
+		Template.todayis.today();
 		console.log('settings');},
 	'click #launch_contact' : function(event) {
 		$('#main').html(Meteor.render(Template.contact));
-		console.log('contact');}										
+		Template.todayis.today();
+		console.log('contact');},
+	'click #launch_export' : function(event) {
+		$('#main').html(Meteor.render(Template.export_docs));
+		Template.todayis.today();
+		Session.set("export_flag", true);
+		console.log('export');}
 };
 
 function today_better_check() {
