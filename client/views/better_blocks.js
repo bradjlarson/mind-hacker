@@ -130,9 +130,8 @@ Template.better_blocks.events = {
 			summaries.insert({create_date : Session.get("today"), create_time : Session.get("now"), summary : summary_text, user_id : Meteor.userId()});
 			Session.set("todays_summary", true);
 		}
-		//Need some way to signal that I've completed this task
-		//done.insert({create_date : Session.get("today"), create_time : Session.get("now"), better_block : "summ-yest", display_name : });
-		//Session.set("summary_done", true);
+		return false;
+		console.log('summary updated');
 	},
 	'click .task-remove' : function(event) {
 		var task_id = $(event.target).attr("name");

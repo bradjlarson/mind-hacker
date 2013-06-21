@@ -10,6 +10,14 @@
 				</tr>
 				{{/each}}
 			</table>
+			{{#isolate}}
+			{{#if today_check}}
+			<div class="input-append span10">
+				<input id="todays-task" type="text" class="span12">
+				 <button class="btn" id="add-task">Add</button>
+			</div>
+			{{/if}}
+			{{/isolate}}
 		</div>
 	</div>
 	<div class="main-block row-fluid">

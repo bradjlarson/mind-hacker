@@ -63,13 +63,16 @@
 				<div id="main" class="span6">		
 					{{> today_main}}
 				</div>
+				<div>
+					<p></p>
+				</div>	
 			</div>		
 		{{/if}}	
 	{{/if}}
 </template>	
 
 <template name="side_bar">
-	<div class="tabbable tabs-left">
+	<div class="tabbable tabs-left affix">
 		<ul class="nav nav-tabs">
 			<li id="launch_about" class="side-nav"><a href="#about" data-toggle="tab">About</a></li>
 			<li class="active side-nav" id="launch_today" ><a href="#today" data-toggle="tab">Today</a></li>

@@ -16,7 +16,7 @@ var chart_data = {};
 
 Template.progress.rendered = function() {
 //Set up the first task graph
-
+chart_data = {};
 var today = new Date();
 today.setDate(today.getDate()-30);
 var task_labels = [];

@@ -53,7 +53,9 @@
 			  	<strong>Tip: Try writing chronologically, going from morning to evening.</strong>
 			</div>
 			{{/isolate}}
+			{{#isolate}}
 			<textarea id="summ-yest" placeholder="Yesterday I..." class="span5" rows="15">{{#if previous}}{{summary}}{{/if}}</textarea>
+			{{/isolate}}
 		</div>
 	</div>
 	<div class="modal-footer">
@@ -303,7 +305,7 @@
 	</div>
 	<div class="modal-footer">
 		<button name="7.6" class="btn btn-inverse previous-block" data-dismiss="modal" aria-hidden="true">Previous</button>
-		<button id="7.0" class="btn btn-success next-block" data-dismiss="modal" aria-hidden="true">Next</button>
+		<button id="7." class="btn btn-success next-block" data-dismiss="modal" aria-hidden="true">Next</button>
 	</div>
 </div>
 		
