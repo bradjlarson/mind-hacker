@@ -26,7 +26,14 @@ Meteor.publish("Grateful", function() {
 });
 
 Meteor.publish("Done", function() {
-	return done.find({user_id : this.userId});
+	if (admins.find({user_id : this.userId}).fetch())
+	{
+		return done.find();
+	}
+	else
+	{
+		return done.find({user_id : this.userId});
+	}
 });
 
 Meteor.publish("Surveys", function() {

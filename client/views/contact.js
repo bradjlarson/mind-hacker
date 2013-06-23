@@ -30,6 +30,10 @@ Template.contact.events = {
 		delete convo['_id'];
 		console.log(convo);
 		contact.update(doc_id, convo);
+	},
+	'click .archive-submit' : function(event) {
+		var doc_id = $(event.target).attr('name');
+		contact.update(doc_id, {$set : {resolved : 'archived'}});
 	}
 };
 

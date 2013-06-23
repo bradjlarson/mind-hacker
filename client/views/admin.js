@@ -9,6 +9,10 @@ Template.admin.is_admin = function() {
 	}
 };
 
+Template.admin.total_users = function() {
+	return Meteor.users.find().count();
+}
+
 Template.admin.issue = function() {
 	return contact.find({resolved : false, messages : {$exists:true}}, {sort : {last_response : 1}});
 };
@@ -28,4 +32,4 @@ Template.admin.events = {
 		console.log(convo);
 		contact.update(doc_id, convo);
 	}
-}
+};
