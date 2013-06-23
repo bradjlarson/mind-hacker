@@ -41,17 +41,6 @@
 		{{> login_beta}}
 	{{/if}}	
 	{{#if logged_in}}
-		{{#if today_not_done}}
-			{{> better_blocks}}
-			{{> todayis}}
-			{{> summ_yesterday}}
-			{{> tasks_yesterday}}
-			{{> tasks_today}}
-			{{> grateful}}
-			{{> counter_factual}}
-			{{> today_i_feel}}
-			{{> yesterday_i_felt}}
-		{{else}}
 			<div class="clearfix">
 			{{> better_blocks}}
 			{{> todayis}}
@@ -67,7 +56,6 @@
 					<p></p>
 				</div>	
 			</div>		
-		{{/if}}	
 	{{/if}}
 </template>	
 

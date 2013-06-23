@@ -1,0 +1,43 @@
+<template name="admin">
+	{{#if is_admin}}
+		<div id="user_stats">
+			<p>Number of users: {{total_users}}</p>
+		</div>
+		<div id="conversations" class="accordion span6">
+			{{#if issue}}
+			{{#each issue}}
+			<div class="accordion-group">
+			    <div class="accordion-heading">
+				<a class="accordion-toggle" data-toggle="collapse" data-parent="#conversations" href="#{{_id}}">
+					<div class="page-header">
+						<p>Created: {{create_date}} | User: {{user}} | Type: {{type}}</p>
+					</div>
+				</a>	
+				<div id="{{_id}}" class="accordion-body collapse in">
+		      		<div class="accordion-inner">
+						{{#each messages}}
+						<div class="message">	
+							<p>{{user}} ({{date}}:{{time}}):</p>
+							<p class="well">{{text}}</p>
+						</div>
+						{{/each}}
+						<textarea class="respond span5" rows="4" id="{{_id}}_respond"></textarea>
+						<button class="btn btn-inverse respond-submit" name="{{_id}}">Respond</button>	
+					</div>	
+				</div>
+			</div>
+			{{/each}}
+			{{else}}
+			<div>
+				<p>No unresolved conversations. </p>
+			</div>
+			{{/if}}	
+		</div>
+	{{else}}
+		<div>
+			<p>Error, page not found.</p>
+		</div>
+	{{/if}}
+</template>			
+					
+			

@@ -18,4 +18,30 @@
 			</div>
 		</form>
 	</div>
+	{{#if conversations}}
+	<div class="span6">
+		{{#each conversations}}
+		<div class="accordion-group">
+		    <div class="accordion-heading">
+			<a class="accordion-toggle" data-toggle="collapse" data-parent="#conversations" href="#{{_id}}">
+				<div class="page-header">
+					<p>Created: {{create_date}} | Type: {{type}}</p>
+				</div>
+			</a>	
+			<div id="{{_id}}" class="accordion-body collapse in">
+	      		<div class="accordion-inner">
+					{{#each messages}}
+					<div class="message">	
+						<p>{{user}} ({{date}}:{{time}}):</p>
+						<p class="well">{{text}}</p>
+					</div>
+					{{/each}}
+					<textarea class="respond span5" rows="4" id="{{_id}}_respond"></textarea>
+					<button class="btn btn-inverse respond-submit" name="{{_id}}">Respond</button>	
+				</div>	
+			</div>
+		</div>
+		{{/each}}
+	</div>
+	{{/if}}	
 </template>

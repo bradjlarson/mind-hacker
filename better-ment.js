@@ -9,6 +9,7 @@ blocks = new Meteor.Collection("blocks");
 about = new Meteor.Collection("about");
 contact = new Meteor.Collection("contact");
 export_docs = new Meteor.Collection("export_docs");
+admins = new Meteor.Collection("admins");
 
 if (Meteor.isServer)
 {
@@ -45,13 +46,23 @@ Meteor.publish("About", function() {
 });
 
 Meteor.publish("Contact", function() {
-	return contact.find({user_id : this.userId});
+	if (admins.find({user_id : this.userId}).fetch())
+	{
+		return contact.find();
+	}
+	else
+	{
+		return contact.find({user_id : this.userId});
+	}
 });
 
 Meteor.publish("Export", function() {
 	return export_docs.find({user_id : this.userId});
 });
 
+Meteor.publish("Admins", function() {
+	return admins.find({user_id : this.userId});
+});
 
 Meteor.methods({
 	'update_records' : function() {
@@ -63,6 +74,17 @@ Meteor.methods({
 	counterfact.update({}, {$set : {user_id : this.userId}}, {multi : true});
 	return "records updated";
 	}	
+});
+
+Meteor.publish("userData", function () {
+	if (admins.find({user_id : this.userId}).fetch())
+	{
+		return Meteor.users.find();
+	}
+  	else
+	{
+		return Meteor.users.find({_id: this.userId});
+	}
 });
 
 //Meteor.call('update_records', function(error, result){console.log(error+'/'+result)});
@@ -90,6 +112,7 @@ Meteor.subscribe("Blocks");
 Meteor.subscribe("About");
 Meteor.subscribe("Contact");
 Meteor.subscribe("Export");
+Meteor.subscribe("Admins");
 	
 //setTimeout(function(){var today = new Date(); Session.set("now", today.timeNow_is());}, 1000);
 	
