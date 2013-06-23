@@ -64,18 +64,6 @@ Meteor.publish("Admins", function() {
 	return admins.find({user_id : this.userId});
 });
 
-Meteor.methods({
-	'update_records' : function() {
-	tasks.update({}, {$set : {user_id : this.userId}}, {multi : true});
-	summaries.update({}, {$set : {user_id : this.userId}}, {multi : true});
-	grateful.update({}, {$set : {user_id : this.userId}}, {multi : true});
-	done.update({}, {$set : {user_id : this.userId}}, {multi : true});
-	surveys.update({}, {$set : {user_id : this.userId}}, {multi : true});
-	counterfact.update({}, {$set : {user_id : this.userId}}, {multi : true});
-	return "records updated";
-	}	
-});
-
 Meteor.publish("userData", function () {
 	if (admins.find({user_id : this.userId}).fetch())
 	{
@@ -87,16 +75,20 @@ Meteor.publish("userData", function () {
 	}
 });
 
-//Meteor.call('update_records', function(error, result){console.log(error+'/'+result)});
+Meteor.methods({
+	/*
+	'update_records' : function() {
+	tasks.update({}, {$set : {user_id : this.userId}}, {multi : true});
+	summaries.update({}, {$set : {user_id : this.userId}}, {multi : true});
+	grateful.update({}, {$set : {user_id : this.userId}}, {multi : true});
+	done.update({}, {$set : {user_id : this.userId}}, {multi : true});
+	surveys.update({}, {$set : {user_id : this.userId}}, {multi : true});
+	counterfact.update({}, {$set : {user_id : this.userId}}, {multi : true});
+	return "records updated";
+	}
+	*/	
+});
 
-/*
-tasks.update({}, {$set : {user_id : this.userId}});
-summaries.update({}, {$set : {user_id : this.userId}});
-grateful.update({}, {$set : {user_id : this.userId}});
-done.update({}, {$set : {user_id : this.userId}});
-surveys.update({}, {$set : {user_id : this.userId}});
-counterfact.update({}, {$set : {user_id : this.userId}});
-*/
 }
 
 if (Meteor.isClient)
@@ -113,6 +105,7 @@ Meteor.subscribe("About");
 Meteor.subscribe("Contact");
 Meteor.subscribe("Export");
 Meteor.subscribe("Admins");
+Meteor.subscribe("userData");
 	
 //setTimeout(function(){var today = new Date(); Session.set("now", today.timeNow_is());}, 1000);
 	
