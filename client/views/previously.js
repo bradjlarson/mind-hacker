@@ -15,5 +15,5 @@ Template.previously.previous_counter = function() {
 	return counterfact.find({create_date : {$lt : Session.get("today")}}, {sort : {create_date : -1}});
 }
 Template.previously.rendered = function() {
-	$('.collapse').collapse('hide');
+	//$('.collapse').collapse('hide');
 }	

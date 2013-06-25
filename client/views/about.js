@@ -27,8 +27,15 @@ Template.about.events = {
 };
 
 Template.about.rendered = function() {
-	$(".collapse").collapse('hide');
+	//$(".collapse").collapse('hide');
+	show_first();
+	var show_check = $('.collapse').attr("style");
 };
+
+function show_first() {
+	console.log("showing first");
+	$('.collapse').first().collapse('show');
+}
 
 /*
 about collection structure:
