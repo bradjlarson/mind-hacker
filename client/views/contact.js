@@ -12,11 +12,11 @@ Template.contact.events = {
 		new_feedback['resolved'] = false;
 		contact.insert(new_feedback);
 		$('#contact_form')[0].reset();
-		$('#contact_submit').removeClass("btn-inverse").addClass("btn-success").html("Submitted!");
+		$('#contact_submit').removeClass("btn-primary").addClass("btn-success").html("Submitted!");
 		return false;
 	},
 	'change #feedback_text' : function(event) {
-		$('#contact_submit').removeClass("btn-success").addClass("btn-inverse").html("Submit");
+		$('#contact_submit').removeClass("btn-success").addClass("btn-primary").html("Submit");
 		return false;
 	},
 	'click .respond-submit' : function(event) {

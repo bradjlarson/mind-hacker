@@ -29,7 +29,6 @@ Template.about.events = {
 Template.about.rendered = function() {
 	//$(".collapse").collapse('hide');
 	show_first();
-	var show_check = $('.collapse').attr("style");
 };
 
 function show_first() {

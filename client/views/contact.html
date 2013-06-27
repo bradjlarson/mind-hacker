@@ -14,7 +14,7 @@
 			{{/isolate}}
 			<div>
 			{{#isolate}}	
-			<button class="btn btn-inverse" id="contact_submit">Submit</button>
+			<button class="btn btn-primary" id="contact_submit">Submit</button>
 			{{/isolate}}
 			</div>
 		</form>
@@ -33,7 +33,7 @@
 	      		<div class="accordion-inner">
 					{{#each messages}}
 					<div class="message">	
-						<p>{{user}} ({{date}}:{{time}}):</p>
+						<p>{{user}} ({{date}} @ {{time}}):</p>
 						<p class="well">{{text}}</p>
 					</div>
 					{{/each}}

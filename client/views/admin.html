@@ -2,7 +2,11 @@
 	{{#isolate}}
 	{{#if is_admin}}
 		<div id="user_stats">
-			<p>Number of users: {{total_users}}</p>
+			<h4>Number of users: {{total_users}}</h4>
+		</div>
+		<div id="blocks_completed">
+			<h4 class="page-header">Better Blocks Completed Today:</h4>
+			<canvas id="blocks_completed_chart" width="600" height="400"></canvas>
 		</div>
 		<div id="conversations" class="accordion">
 			{{#if issue}}
@@ -14,7 +18,7 @@
 						<p>Created: {{create_date}} | User: {{user}} | Type: {{type}}</p>
 					</div>
 				</a>	
-				<div id="{{_id}}" class="accordion-body collapse in">
+				<div id="{{_id}}" class="accordion-body collapse">
 		      		<div class="accordion-inner">
 						{{#each messages}}
 						<div class="message">	

@@ -84,7 +84,14 @@ Meteor.publish("userData", function () {
 });
 
 Meteor.publish("User_settings", function() {
-	return user_settings.find({user_id : this.userId});
+	if (admins.find({user_id : this.userId}).count() > 0)
+	{
+		return user_settings.find();
+	}
+	else
+	{
+		return user_settings.find({user_id : this.userId});
+	}
 });
 
 }
@@ -198,6 +205,15 @@ Template.side_bar.admin_check = function() {
 		return false;
 	}
 };
+
+Template.side_bar.conversations = function() {
+	return contact.find({user_id : Meteor.userId(), resolved : true}, {sort : {create_date : -1}}).count();
+};
+
+Template.side_bar.adminsations = function() {
+	return contact.find({user_id : Meteor.userId(), resolved : false}, {sort : {create_date : -1}}).count();
+};
+
 
 Template.side_bar.events = {
 	'click #launch_about' : function() {
