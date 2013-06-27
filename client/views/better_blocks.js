@@ -53,8 +53,11 @@ Template.better_blocks.today = function() {
 };
 
 Template.better_blocks.today_check = function() {
+	var limit = user_settings.find({user_id : Meteor.userId()}).fetch()[0]['num_tasks'];
+	var less_than = limit ? limit : 3;
+	console.log(less_than);
 	var todays = tasks.find({complete : false});
-	if (todays.count() <3)
+	if (todays.count() < less_than)
 	{
 		return true;
 		Session.set("today_done", false);
@@ -76,7 +79,10 @@ Template.better_blocks.gratitude = function() {
 
 Template.better_blocks.grateful_check = function() {
 	var gratitudes = grateful.find({create_date : Session.get("today")});
-	if (gratitudes.count() <3)
+	var limit = user_settings.find({user_id : Meteor.userId()}).fetch()[0]['num_gratitudes'];
+	var less_than = limit ? limit : 3;
+	console.log(less_than);
+	if (gratitudes.count() < less_than)
 	{
 		return true;
 		Session.set("grateful_done", false);
@@ -99,7 +105,10 @@ Template.better_blocks.counter_fact = function() {
 
 Template.better_blocks.counter_check = function() {
 	var counters = counterfact.find({create_date : Session.get("today")});
-	if (counters.count() <3)
+	var limit = user_settings.find({user_id : Meteor.userId()}).fetch()[0]['num_counterfactuals'];
+	var less_than = limit ? limit : 3;
+	console.log(less_than);
+	if (counters.count() < less_than)
 	{
 		return true;
 		Session.set("counter_done", false);
@@ -257,7 +266,7 @@ Template.better_blocks.events = {
 		var input_id = $(event.target).attr("id");
 		Session.set("block_intro", true);
 		block_manager(input_id);
-		//done.insert({create_time : Session.get("now"), create_date : Session.get("today"), block_id : input_id, user_id : Meteor.userId()});
+		done.insert({create_time : Session.get("now"), create_date : Session.get("today"), block_id : input_id, user_id : Meteor.userId()});
 	},
 	'click .next-block' : function(event) {
 		var input_id = $(event.target).attr("id");
@@ -267,7 +276,12 @@ Template.better_blocks.events = {
 	'click .previous-block' : function(event) {
 		var input_id = $(event.target).attr("name");
 		block_manager(input_id);
-		done.insert({create_time : Session.get("now"), create_date : Session.get("today"), block_id : input_id, user_id : Meteor.userId()});
+		//done.insert({create_time : Session.get("now"), create_date : Session.get("today"), block_id : input_id, user_id : Meteor.userId()});
+	},
+	'click #goto_about' : function(event) {
+		$('#main').html(Meteor.render(Template.about));
+		$('.side-nav').removeClass("active");
+		$('#launch_about').addClass("active");
 	}	
 };
 
@@ -297,7 +311,8 @@ Template.better_blocks.rendered = function() {
 block_show = function() {
 	if (Session.get("done_load"))
 	{
-		var num_done = done.find({create_date : Session.get("today")}).count();
+		block_id : "intro.1"
+		var num_done = done.find({user_id : Meteor.userId(), create_date : Session.get("today"), block_id : {$nin: ['intro.1', '0.1']}}).count();
 		console.log(num_done);
 		var current_block = num_done + 1;
 		console.log(current_block);

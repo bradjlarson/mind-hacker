@@ -3,6 +3,7 @@
 </head>
 
 <body>
+	
 	<div>
 		{{> splash}}
 	</div>
@@ -14,8 +15,8 @@
 		<h3 class="page-header pull-left return-to-main">BetterMe</h3>
 		{{#isolate}}<h3 class="page-header pull-right">Today is: {{today}} @ {{now}} </h3>{{/isolate}}
 	</div>
-	<div class="span2">
-		<div class="pull-right"><h6 class="">{{loginButtons}}</h6></div>
+	<div class="span3">
+		<div class="pull-left" id="login_box"><h5 class="">{{loginButtons}}</h5></div>
 	</div>
 </div>		
 </template>
@@ -42,15 +43,19 @@
 	{{/if}}	
 	{{#if logged_in}}
 			<div class="clearfix">
+			{{#isolate}}	
 			{{> better_blocks}}
 			{{> todayis}}
+			{{/isolate}}
 			</div>
 			<div class="container-fluid">
 				<div class="span2">
 					{{> side_bar}}
 				</div>
-				<div id="main" class="span6">		
+				<div id="main" class="span6">
+					{{#isolate}}		
 					{{> today_main}}
+					{{/isolate}}
 				</div>
 				<div>
 					<p></p>
@@ -58,7 +63,8 @@
 			</div>		
 	{{/if}}
 </template>	
-
+<!-- Add badge to Feedback tab
+	Possibly add ? to all as well, for tour of page-->
 <template name="side_bar">
 	<div class="tabbable tabs-left affix">
 		<ul class="nav nav-tabs">

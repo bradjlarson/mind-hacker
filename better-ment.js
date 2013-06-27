@@ -10,6 +10,7 @@ about = new Meteor.Collection("about");
 contact = new Meteor.Collection("contact");
 export_docs = new Meteor.Collection("export_docs");
 admins = new Meteor.Collection("admins");
+user_settings = new Meteor.Collection("user_settings");
 
 if (Meteor.isServer)
 {
@@ -82,6 +83,10 @@ Meteor.publish("userData", function () {
 	}
 });
 
+Meteor.publish("User_settings", function() {
+	return user_settings.find({user_id : this.userId});
+});
+
 Meteor.methods({
 	/*
 	'update_records' : function() {
@@ -95,6 +100,25 @@ Meteor.methods({
 	}
 	*/	
 });
+/*
+Accounts.onCreateUser(function(options, user) {
+  	console.log(user);
+	console.log('new user created');
+	if (options.profile)
+	{
+		user.profile = options.profile;
+	}
+	console.log(user['_id']);
+	return user;
+});
+
+Accounts.onCreateUser(function(options, user) {
+	//var email = Meteor.users.find({_id : this.userId}).fetch()[0].emails[0].address;
+	//console.log(email);
+	console.log('initial settings inserted');
+	user_settings.insert({user_id : this.userId, name : "", email : "", age : "", gender : "", email_reminders : "off", num_tasks : 3, num_gratitudes : 3, num_counterfactuals : 3});
+});
+*/
 
 }
 
@@ -112,6 +136,7 @@ Meteor.subscribe("About");
 Meteor.subscribe("Contact");
 Meteor.subscribe("Export");
 Meteor.subscribe("Admins");
+Meteor.subscribe("User_settings");
 Meteor.subscribe("userData");
 	
 //setTimeout(function(){var today = new Date(); Session.set("now", today.timeNow_is());}, 1000);
@@ -204,7 +229,7 @@ Template.side_bar.events = {
 	'click #launch_today' : function() {
 		$('#main').html(Meteor.render(Template.today_main));
 		Template.todayis.today();
-		block_show();
+		//block_show();
 		console.log('today');
 		//today_better_check();
 		},
@@ -225,26 +250,11 @@ Template.side_bar.events = {
 		Template.todayis.today();
 		console.log('contact');},
 	'click #launch_export' : function(event) {
-		$('#main').html(Meteor.render(Template.export_docs));
+		$('#main').html(Meteor.render(Template.export_main));
 		Template.todayis.today();
 		Session.set("export_flag", true);
 		console.log('export');}
 };
-
-function today_better_check() {
-	if (Session.get("done_load"))
-	{
-		var num_done = done.find({create_date : Session.get("today")}).count();
-		console.log(num_done);
-		var current_block = num_done + 1;
-		console.log(current_block);
-		if (num_done < 7)
-		{
-		$("#block-"+current_block).modal('show');
-		}
-		console.log('better_check');
-	}	
-}
 
 
 
@@ -258,6 +268,23 @@ tasks structure:
 	last_date :
 	complete : 
 }
+
+
+function today_better_check() {
+	if (Session.get("done_load"))
+	{
+		var num_done = done.find({user_id : Meteor.userId(), create_date : Session.get("today")}).count();
+		console.log(num_done);
+		var current_block = num_done + 1;
+		console.log(current_block);
+		if (num_done < 7)
+		{
+		$("#block-"+current_block).modal('show');
+		}
+		console.log('better_check');
+	}	
+}
+
 */
 
 }

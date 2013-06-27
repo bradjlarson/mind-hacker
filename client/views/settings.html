@@ -1,16 +1,82 @@
 <!-- 
 Settings that I would like to add:
+
 Name : Text
 Email : Text
+Age : 
+Gender : 
 Daily Email Reminders : On/Off
+Customize blocks : Button
+Max # of tasks you can input:
+Max # of gratitudes you can input:
+Max # of counterfactuals you can input: 
+
+Completely redo settings? Simpler form, much easier to maintain. Will probs look better too.
+Get rid of login buttons
 
 -->
+<template name="settings">
+	<form>
+		<fieldset>
+			<legend>Settings {{#isolate}}<button class="btn btn-primary pull-right" id="settings_save">Settings Saved.</button>{{/isolate}}</legend>
+			<label>Name:</label>
+			<input class="acct_setting" type="text" id="name">
+			<label>Email:</label>
+			<input class="acct_setting" type="text" id="email">
+			<label>Age:</label>
+			<input class="acct_setting" type="text" id="age">
+			<label>Gender:</label>
+			{{#isolate}}
+			<select class="acct_setting" id="gender">
+				<option value=""></option>
+				<option value="female">Female</option>
+				<option value="male">Male</option>
+			</select>
+			{{/isolate}}
+			<label>Daily Reminders:</label>
+			{{#isolate}}
+			<div class="btn-group acct_setting" data-toggle="buttons-radio">
+				<button class="btn btn-primary email_option" id="emails_on" value="on">On</button>
+				<button class="btn btn-primary email_option" id="emails_off" value="off">Off</button>
+			</div>
+			{{/isolate}}
+			{{#isolate}}
+			<label>Max # of tasks you can input:</label>
+			<select class="acct_setting" id="num_tasks">
+				<option id="task_1" value="1">1</option>
+				<option id="task_2" value="2">2</option>
+				<option id="task_3" value="3">3</option>
+				<option id="task_4" value="4">4</option>
+				<option id="task_5" value="5">5</option>
+				<option id="task_none" value="99">No Limit</option>
+			</select>
+			<label>Max # of gratitudes you can input:</label>
+			<select class="acct_setting"  id="num_gratitudes">
+				<option id="grateful_1" value="1">1</option>
+				<option id="grateful_2" value="2">2</option>
+				<option id="grateful_3" value="3">3</option>
+				<option id="grateful_4" value="4">4</option>
+				<option id="grateful_5" value="5">5</option>
+			</select>	
+			<label>Max # of counterfactuals you can input:</label>
+			<select class="acct_setting"  id="num_counterfactuals">
+				<option id="counter_1" value="1">1</option>
+				<option id="counter_2" value="2">2</option>
+				<option id="counter_3" value="3">3</option>
+				<option id="counter_4" value="4">4</option>
+				<option id="counter_5" value="5">5</option>
+			</select>
+			{{/isolate}}		
+		</fieldset>
+	</form>
+</template>					
+<!--
 <template name="settings">
 	<div class="settings-container span10">
 		<div class="settings-block">
 			<form class="form-horizontal">
 				<div class="control-group">
-					<label class="control-label" for="num_tasks">Number of tasks you can input:</label>
+					<label class="control-label" for="num_tasks"># of tasks you can input:</label>
 					<div class="controls">
 						<select class="block-setting" id="num_tasks">
 							<option id="task_1" value="1">1</option>
@@ -26,7 +92,7 @@ Daily Email Reminders : On/Off
 		<div class="settings-block">
 			<form class="form-horizontal">
 				<div class="control-group">
-					<label class="control-label" for="num_tasks">Number of gratitudes you can input:</label>
+					<label class="control-label" for="num_tasks"># of gratitudes you can input:</label>
 					<div class="controls">
 						<select class="block-setting" id="num_tasks">
 							<option id="grateful_1" value="1">1</option>
@@ -42,7 +108,7 @@ Daily Email Reminders : On/Off
 		<div class="settings-block">
 			<form class="form-horizontal">
 				<div class="control-group">
-					<label class="control-label" for="num_tasks">Number of counterfactuals you can input:</label>
+					<label class="control-label" for="num_tasks"># of counterfactuals you can input:</label>
 					<div class="controls">
 						<select class="block-setting" id="num_tasks">
 							<option id="counter_1" value="1">1</option>
@@ -59,4 +125,6 @@ Daily Email Reminders : On/Off
 			{{loginButtons}}						
 		</div>
 	</div>
-</template>			
+</template>
+
+-->			

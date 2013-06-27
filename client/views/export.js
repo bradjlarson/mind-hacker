@@ -3,6 +3,11 @@ Template.export_docs.export_item = function() {
 };
 
 //[tasks, summaries, grateful, done, surveys, counterfact, blocks, about, contact];
+Template.export_main.events = {
+	'click #generate_export' : function() {
+		$('#export_container').html(Meteor.render(Template.export_docs));
+	}
+};
 
 Template.export_docs.rendered = function() {
 console.log("export rendered");

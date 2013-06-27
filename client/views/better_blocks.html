@@ -21,6 +21,24 @@
 	I think I am also going to add an introduction modal
 	I'm also going to add alerts to each modal that tells the user what to do...
 -->
+<!-- First time to site modal -->
+<div id="site_intro_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="site-intro" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+		<h4 id="site-intro">Welcome to BetterMe.</h4>
+	</div>
+	<div class="modal-body">
+		<div id="site-intro-body">
+			<p>BetterMe is all about helping you become better. We believe there are a number of simple things you can do a daily basis that will help <strong>you</strong> improve yourself. These activities should only take 10-15 minutes of your time, but studies have shown significant benefits. </p>
+			<p>Currently the focus is on leveraging the power of psychology to make you <strong>happier</strong>, <strong>more organized</strong>, and <strong>more likely to achieve your goals</strong>, but over time we'll expand that focus to encompass other aspects of your life as well. We'll also allow you to choose which areas of your life you'd like to focus on at any point in time, letting you continue to get better and better.</p>
+			<p>If you'd like to be a part of this project, and start improving yourself, click the <strong>"Get Started!"</strong> button to jump into the activities. If you'd like to know more about BetterMe, click "Learn More" to read about each activity.</p> 
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button id="goto_about" class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Learn More</button>
+		<button id="intro.1" class="btn btn-success start-block" data-dismiss="modal" aria-hidden="true">Get Started!</button>
+	</div>
+</div>
 
 <!--Introduction Modal: #0 -->
 <div id="block-0" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="counter-header" aria-hidden="true">
@@ -111,9 +129,9 @@
 		<div id="today_tip" class="alert better-tip alert-info">
 		  	<button type="button" class="close" data-dismiss="alert">&times;</button>
 			{{#if today_check}}
-		  	<strong>Tip: Add some more tasks for today - you can have up to 3.</strong>
+		  	<strong>Tip: Try to add tasks that you'll be able to complete today</strong>
 			{{else}}
-			<strong>Tip: You've already got 3 tasks for today, click next to continue</strong>
+			<strong>You've already got enough tasks for today, click next to continue</strong>
 			{{/if}}
 		</div>
 		{{/isolate}}
@@ -144,7 +162,7 @@
 <div id="block-4" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="counter-header" aria-hidden="true">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-		<h4 id="grateful-header">3 Things I am grateful for:</h4>
+		<h4 id="grateful-header">Things I am grateful for:</h4>
 	</div>
 	<div class="modal-body">
 		{{#isolate}}
@@ -180,7 +198,7 @@
 <div id="block-5" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="counter-header" aria-hidden="true">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-		<h4 id="counter-header">3 Things I could have done better yesterday:</h4>
+		<h4 id="counter-header">Things I could have done better yesterday:</h4>
 	</div>
 	<div class="modal-body">
 		{{#isolate}}

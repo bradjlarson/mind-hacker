@@ -31,12 +31,26 @@ Template.today_main.counterfact = function() {
 };
 
 Template.today_main.rendered = function() {
-	block_show();
+	if(Session.get("done_load"))
+	{
+		var first_check = done.find({user_id : Meteor.userId(), block_id : "intro.1"});
+		if (first_check.count() == 0)
+		{
+			$('#site_intro_modal').modal('show');
+		}
+		else
+		{
+			block_show();
+		}
+	}
 };
 
 Template.today_main.today_check = function() {
+	var limit = user_settings.find({user_id : Meteor.userId()}).fetch()[0]['num_tasks'];
+	var less_than = limit ? limit : 3;
+	console.log(less_than);
 	var todays = tasks.find({complete : false});
-	if (todays.count() <3)
+	if (todays.count() < less_than)
 	{
 		return true;
 		Session.set("today_done", false);
