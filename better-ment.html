@@ -49,6 +49,7 @@
 			{{/isolate}}
 			</div>
 			<div class="container-fluid">
+			<div class="row-fluid">
 				<div class="span2">
 					{{> side_bar}}
 				</div>
@@ -57,11 +58,10 @@
 					{{> today_main}}
 					{{/isolate}}
 				</div>
-				<div>
-					<p></p>
-				</div>	
+			</div>		
 			</div>		
 	{{/if}}
+	{{> footer}}
 </template>	
 <!-- Add badge to Feedback tab
 	Possibly add ? to all as well, for tour of page-->
@@ -77,7 +77,14 @@
 			<li id="launch_export" class="side-nav"><a href="#export" data-toggle="tab">Export</a></li>	
 		</ul>
 	</div>
-</template>	
+</template>
+<template name="footer">
+	<div class="row-fluid">
+		<div id="footer-body" class="span8">
+			<p class="text-center">A <a href="http://larson-ventures.com">Larson Ventures LLC</a> Production.</p>
+		</div>
+	</div>
+</template>			 	
 
 
 		
