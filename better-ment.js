@@ -27,7 +27,7 @@ Meteor.publish("Grateful", function() {
 });
 
 Meteor.publish("Done", function() {
-	if (admins.find({user_id : this.userId}).fetch())
+	if (admins.find({user_id : this.userId}).count() > 0)
 	{
 		return done.find();
 	}
@@ -54,7 +54,7 @@ Meteor.publish("About", function() {
 });
 
 Meteor.publish("Contact", function() {
-	if (admins.find({user_id : this.userId}).fetch())
+	if (admins.find({user_id : this.userId}).count() > 0)
 	{
 		return contact.find();
 	}
@@ -73,7 +73,7 @@ Meteor.publish("Admins", function() {
 });
 
 Meteor.publish("userData", function () {
-	if (admins.find({user_id : this.userId}).fetch())
+	if (admins.find({user_id : this.userId}).count() > 0)
 	{
 		return Meteor.users.find();
 	}
