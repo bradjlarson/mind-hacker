@@ -191,7 +191,7 @@ Template.todayis.events = {
 		$('.side-nav').removeClass("active");
 		$('#launch_today').addClass("active");
 		Template.todayis.today();
-		block_show();
+		//block_show();
 		console.log('today');
 		//today_better_check();
 	}

@@ -17,24 +17,8 @@ Template.settings.events = {
 };	
 		
 Template.settings.rendered = function() {
-	/*
-	var current_profile = Meteor.users.find({_id: this.userId}).fetch()[0];
-	for (setting in current_profile)
-	{
-		if($('#'+setting))
-		{
-			$('#'+setting).val(current_profile[setting]);
-		}
-	}
-	*/
-	/*
-	var current_profile = Meteor.users.find({_id: Meteor.userId()}).fetch()[0]['profile'];
-	var profile = current_profile['profile'];
-	console.log(current_profile);
-	console.log(profile);
-	*/
-	var has_settings = user_settings.find({user_id : Meteor.userId()}).fetch()[0];
-	if(has_settings)
+	var has_settings = user_settings.find({user_id : Meteor.userId()});
+	if(has_settings.count() > 0)
 	{
 		console.log('settings found');
 	}
@@ -43,12 +27,14 @@ Template.settings.rendered = function() {
 		user_settings.insert({user_id : Meteor.userId(), name : "", email : "", age : "", gender : "", email_reminders : "off", num_tasks : 3, num_gratitudes : 3, num_counterfactuals : 3});
 		console.log('settings added');
 	}
-	var email = Meteor.users.find({_id : Meteor.userId()}).fetch()[0].emails[0]['address'];
+	//var email = Meteor.users.find({_id : Meteor.userId()}).fetch()[0].emails[0]['address'];
 	var current_profile = user_settings.find({user_id : Meteor.userId()}).fetch()[0];
+	/*
 	if(current_profile.email == "")
 	{
 		current_profile.email = email;
 	}
+	*/
 	console.log(current_profile);
 	$('#name').val(current_profile['name'] ? current_profile['name'] : "");
 	$('#email').val(current_profile.email ? current_profile.email : "");

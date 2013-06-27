@@ -9,13 +9,13 @@ Template.today_main.events = {
 		console.log('task : '+task_id+' moved to today.');		
 		tasks.update(task_id, {$set : {last_date : Session.get("today")}});
 	},
-	'click #add-task' : function(event) {
-		var task_text = $('#todays-task').val();
+	'click #add-task-main' : function(event) {
+		var task_text = $('#todays-task-main').val();
 		console.log(task_text);
 		if (task_text)
 		{
 			tasks.insert({task : task_text, create_date : Session.get("today"), last_date : Session.get("today"), create_time : Session.get("now"), user_id : Meteor.userId(), complete : false});	
-			$('#todays-task').val("").focus();
+			$('#todays-task-main').val("").focus();
 		}
 	}
 };
@@ -46,8 +46,12 @@ Template.today_main.rendered = function() {
 };
 
 Template.today_main.today_check = function() {
-	var limit = user_settings.find({user_id : Meteor.userId()}).fetch()[0]['num_tasks'];
-	var less_than = limit ? limit : 3;
+	var limit = user_settings.find({user_id : Meteor.userId()});
+	var less_than = 3;
+	if(limit.count() > 0)
+	{
+		var less_than = limit.fetch()[0]['num_tasks'];
+	}
 	console.log(less_than);
 	var todays = tasks.find({complete : false});
 	if (todays.count() < less_than)

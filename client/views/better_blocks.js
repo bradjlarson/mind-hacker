@@ -53,8 +53,12 @@ Template.better_blocks.today = function() {
 };
 
 Template.better_blocks.today_check = function() {
-	var limit = user_settings.find({user_id : Meteor.userId()}).fetch()[0]['num_tasks'];
-	var less_than = limit ? limit : 3;
+	var limit = user_settings.find({user_id : Meteor.userId()});
+	var less_than = 3;
+	if(limit.count() > 0)
+	{
+		var less_than = limit.fetch()[0]['num_tasks'];
+	}
 	console.log(less_than);
 	var todays = tasks.find({complete : false});
 	if (todays.count() < less_than)
@@ -66,10 +70,6 @@ Template.better_blocks.today_check = function() {
 	{
 		return false;
 		Session.set("today_done", true);
-		$('#todays_tasks').collapse('hide');
-		$('#gratefuls').collapse('show');
-		$("#today-task-header").addClass("text-success");
-		console.log('today done');
 	}
 };
 
@@ -79,8 +79,12 @@ Template.better_blocks.gratitude = function() {
 
 Template.better_blocks.grateful_check = function() {
 	var gratitudes = grateful.find({create_date : Session.get("today")});
-	var limit = user_settings.find({user_id : Meteor.userId()}).fetch()[0]['num_gratitudes'];
-	var less_than = limit ? limit : 3;
+	var limit = user_settings.find({user_id : Meteor.userId()});
+	var less_than = 3;
+	if(limit.count() > 0)
+	{
+		var less_than = limit.fetch()[0]['num_gratitudes'];
+	}
 	console.log(less_than);
 	if (gratitudes.count() < less_than)
 	{
@@ -91,10 +95,6 @@ Template.better_blocks.grateful_check = function() {
 	{
 		return false;
 		Session.set("grateful_done", true);
-		$('#gratefuls').collapse('hide');
-		$('#counter').collpase('show');
-		$('#grateful_success').removeClass('hidden');
-		$("#grateful-header").addClass("text-success");
 		console.log('grateful done');
 	}
 };
@@ -105,8 +105,12 @@ Template.better_blocks.counter_fact = function() {
 
 Template.better_blocks.counter_check = function() {
 	var counters = counterfact.find({create_date : Session.get("today")});
-	var limit = user_settings.find({user_id : Meteor.userId()}).fetch()[0]['num_counterfactuals'];
-	var less_than = limit ? limit : 3;
+	var limit = user_settings.find({user_id : Meteor.userId()});
+	var less_than = 3;
+	if(limit.count() > 0)
+	{
+		var less_than = limit.fetch()[0]['num_counterfactuals'];
+	}
 	console.log(less_than);
 	if (counters.count() < less_than)
 	{
@@ -117,10 +121,6 @@ Template.better_blocks.counter_check = function() {
 	{
 		return false;
 		Session.set("counter_done", true);
-		$('#counter').collapse('hide');
-		$('#today_form').collapse('show');
-		$('#counter_success').removeClass('hidden');
-		$("#counter-header").addClass("text-success");
 	}
 };
 
