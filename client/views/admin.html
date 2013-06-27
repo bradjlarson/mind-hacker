@@ -1,9 +1,10 @@
 <template name="admin">
+	{{#isolate}}
 	{{#if is_admin}}
 		<div id="user_stats">
 			<p>Number of users: {{total_users}}</p>
 		</div>
-		<div id="conversations" class="accordion span6">
+		<div id="conversations" class="accordion">
 			{{#if issue}}
 			{{#each issue}}
 			<div class="accordion-group">
@@ -21,7 +22,7 @@
 							<p class="well">{{text}}</p>
 						</div>
 						{{/each}}
-						<textarea class="respond span5" rows="4" id="{{_id}}_respond"></textarea>
+						<textarea class="respond span12" rows="4" id="{{_id}}_respond"></textarea>
 						<button class="btn btn-inverse respond-submit" name="{{_id}}">Respond</button>	
 					</div>	
 				</div>
@@ -38,6 +39,7 @@
 			<p>Error, page not found.</p>
 		</div>
 	{{/if}}
+	{{/isolate}}
 </template>			
 					
 			

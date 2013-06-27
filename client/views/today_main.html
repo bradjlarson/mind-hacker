@@ -2,22 +2,10 @@
 	<div class="main-block row-fluid">
 		<h4 class="page-header">Tasks:</h4>
 		<div class="span10">
-			<table class="table table-bordered">
-				{{#each tasks}}
-				<tr>
-					<td>{{task}}<div class="btn-group pull-right" data-toggle="buttons-radio">
-					<button name="{{_id}}" class="btn btn-success task-remove" type="button"><i name="{{_id}}" class="icon-ok icon-white task-remove"></i></button><button name="{{_id}}" class="btn btn-danger task-stay" type="button"><i name="{{_id}}" class="icon-remove icon-white task-stay"></i></button></td>
-				</tr>
-				{{/each}}
-			</table>
-			{{#if today_check}}
-			<div class="input-append span10">
-				<input id="todays-task-main" type="text" class="span12 pull-left">
-				 <button class="btn" id="add-task-main">Add</button>
-			</div>
-			{{/if}}
+			{{> today_tasks_main}}
 		</div>
 	</div>
+	{{#isolate}}
 	<div class="main-block row-fluid">
 		<h4 class="page-header">Things I am thankful for today:</h4>	
 		<div class="span8">
@@ -42,4 +30,24 @@
 			</table>
 		</div>		
 	</div>
+	{{/isolate}}
 </template>
+
+<template name="today_tasks_main">
+	{{#isolate}}
+	<table class="table table-bordered">
+		{{#each tasks}}
+		<tr>
+			<td>{{task}}<div class="btn-group pull-right" data-toggle="buttons-radio">
+			<button name="{{_id}}" class="btn btn-success task-remove-main" type="button"><i name="{{_id}}" class="icon-ok icon-white task-remove-main"></i></button><button name="{{_id}}" class="btn btn-danger task-stay-main" type="button"><i name="{{_id}}" class="icon-remove icon-white task-stay-main"></i></button></td>
+		</tr>
+		{{/each}}
+	</table>
+	{{#if today_check}}
+	<div class="input-append span10">
+		<input id="todays-task-main" type="text" class="span12 pull-left">
+		 <button class="btn" id="add-task-main">Add</button>
+	</div>
+	{{/if}}
+	{{/isolate}}
+</template>	

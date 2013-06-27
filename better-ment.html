@@ -74,7 +74,8 @@
 			<li id="launch_progress" class="side-nav"><a href="#progress" data-toggle="tab">Feedback</a></li>	
 			<li id="launch_settings" class="side-nav"><a href="#settings"data-toggle="tab">Settings</a></li>				
 			<li id="launch_contact" class="side-nav"><a href="#contact" data-toggle="tab">Contact</a></li>
-			<li id="launch_export" class="side-nav"><a href="#export" data-toggle="tab">Export</a></li>	
+			<li id="launch_export" class="side-nav"><a href="#export" data-toggle="tab">Export</a></li>
+			{{#isolate}}{{#if admin_check}}<li id="launch_admin" class="side-nav"><a href="#admin" data-toggle="tab">Admin</a></li>{{/if}}{{/isolate}}	
 		</ul>
 	</div>
 </template>

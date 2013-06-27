@@ -10,8 +10,6 @@ Template.contact.events = {
 		new_feedback['messages'].push({date : Session.get("today"), time: Session.get("now"), user: Meteor.userId(), text: $('#feedback_text').val()});
 		new_feedback['type'] = $('#feedback_type').val();
 		new_feedback['resolved'] = false;
-		console.log(new_feedback);
-		console.log('contact submitted');
 		contact.insert(new_feedback);
 		$('#contact_form')[0].reset();
 		$('#contact_submit').removeClass("btn-inverse").addClass("btn-success").html("Submitted!");
@@ -28,7 +26,6 @@ Template.contact.events = {
 		convo['messages'].push({date : Session.get("today"), time: Session.get("now"), user: Meteor.userId(), text: $('#'+doc_id+'_respond').val()});
 		convo['resolved'] = true;
 		delete convo['_id'];
-		console.log(convo);
 		contact.update(doc_id, convo);
 	},
 	'click .archive-submit' : function(event) {

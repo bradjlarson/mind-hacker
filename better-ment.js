@@ -87,39 +87,6 @@ Meteor.publish("User_settings", function() {
 	return user_settings.find({user_id : this.userId});
 });
 
-Meteor.methods({
-	/*
-	'update_records' : function() {
-	tasks.update({}, {$set : {user_id : this.userId}}, {multi : true});
-	summaries.update({}, {$set : {user_id : this.userId}}, {multi : true});
-	grateful.update({}, {$set : {user_id : this.userId}}, {multi : true});
-	done.update({}, {$set : {user_id : this.userId}}, {multi : true});
-	surveys.update({}, {$set : {user_id : this.userId}}, {multi : true});
-	counterfact.update({}, {$set : {user_id : this.userId}}, {multi : true});
-	return "records updated";
-	}
-	*/	
-});
-/*
-Accounts.onCreateUser(function(options, user) {
-  	console.log(user);
-	console.log('new user created');
-	if (options.profile)
-	{
-		user.profile = options.profile;
-	}
-	console.log(user['_id']);
-	return user;
-});
-
-Accounts.onCreateUser(function(options, user) {
-	//var email = Meteor.users.find({_id : this.userId}).fetch()[0].emails[0].address;
-	//console.log(email);
-	console.log('initial settings inserted');
-	user_settings.insert({user_id : this.userId, name : "", email : "", age : "", gender : "", email_reminders : "off", num_tasks : 3, num_gratitudes : 3, num_counterfactuals : 3});
-});
-*/
-
 }
 
 if (Meteor.isClient)
@@ -139,20 +106,18 @@ Meteor.subscribe("Admins");
 Meteor.subscribe("User_settings");
 Meteor.subscribe("userData");
 	
-//setTimeout(function(){var today = new Date(); Session.set("now", today.timeNow_is());}, 1000);
-	
 Meteor.startup(function() {
 	var today = new Date();
 	Session.setDefault("today", today.today_is());
 	Session.setDefault("now", today.timeNow_is());
 	Session.setDefault("block_intro", false);
+	Session.setDefault("initial_load", false);
 	today.setDate(today.getDate()-1);
 	Session.setDefault("yesterday", today.today_is());
 	//Session.setDefault("todays_summary", false);
 });
 
 Date.prototype.today_is = function(){ 
-	//console.log(this.getDate());
     return (((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) +"/"+((this.getDate() < 10)?"0":"") + this.getDate() +"/"+ this.getFullYear() 
 };
 //For the time now
@@ -160,21 +125,12 @@ Date.prototype.timeNow_is = function(){
      return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
 };
 
-Date.prototype.yesterday = function(){ 
-	//console.log(this.getDate());
-    return (((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) +"/"+((this.getDate() < 10)?"0":"") + this.getDate() +"/"+ this.getFullYear() 
-};
-
-
 Template.todayis.today = function() {
 	var today = new Date();
 	var today_update = today.today_is();
 	Session.set("now", today.timeNow_is());
 	if (Session.get("today") != today_update)
 	{
-		console.log("today updated");
-		console.log(Session.get("today"));
-		console.log(today_update);
 		Session.set("today", today.today_is());
 		today.setDate(today.getDate()-1);
 		Session.set("yesterday", today.today_is());
@@ -190,9 +146,20 @@ Template.todayis.events = {
 		$('#main').html(Meteor.render(Template.today_main));
 		$('.side-nav').removeClass("active");
 		$('#launch_today').addClass("active");
+		if (Session.get("done_load"))
+		{
+			var first_check = done.find({user_id : Meteor.userId(), block_id : "intro.1"});
+			if (first_check.count() == 0)
+			{
+				$('#site_intro_modal').modal('show');
+			}
+			else
+			{
+				block_show();
+			}
+		}
 		Template.todayis.today();
 		//block_show();
-		console.log('today');
 		//today_better_check();
 	}
 };
@@ -213,78 +180,77 @@ Template.splash.logged_out = function() {
 	else
 	{
 		return true;
-	}	
-		
+	}		
 };
 
 Template.splash.logged_in = function() {
 	return Meteor.user();
 };
 
+Template.side_bar.admin_check = function() {
+	var check = admins.find({user_id : Meteor.userId()});
+	if(check.count() > 0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+};
+
 Template.side_bar.events = {
 	'click #launch_about' : function() {
 		$('#main').html(Meteor.render(Template.about));
 		Template.todayis.today();
-		console.log('main');},
+		},
 	'click #launch_today' : function() {
 		$('#main').html(Meteor.render(Template.today_main));
 		Template.todayis.today();
+		if (Session.get("done_load"))
+		{
+			var first_check = done.find({user_id : Meteor.userId(), block_id : "intro.1"});
+			if (first_check.count() == 0)
+			{
+				$('#site_intro_modal').modal('show');
+			}
+			else
+			{
+				block_show();
+			}
+		}
 		//block_show();
-		console.log('today');
 		//today_better_check();
 		},
 	'click #launch_previous' : function(event) {
 		$('#main').html(Meteor.render(Template.previously));
 		Template.todayis.today();
-		console.log('previously');},
+		},
 	'click #launch_progress' : function(event) {
 		$('#main').html(Meteor.render(Template.progress));
 		Template.todayis.today();
-		console.log('progress');},
+		},
 	'click #launch_settings' : function(event) {
 		$('#main').html(Meteor.render(Template.settings));
 		Template.todayis.today();
-		console.log('settings');},
+		},
 	'click #launch_contact' : function(event) {
 		$('#main').html(Meteor.render(Template.contact));
 		Template.todayis.today();
-		console.log('contact');},
+		},
 	'click #launch_export' : function(event) {
 		$('#main').html(Meteor.render(Template.export_main));
 		Template.todayis.today();
 		Session.set("export_flag", true);
-		console.log('export');}
-};
-
-
-
-/*
-tasks structure:
-{
-	task : string,
-	create_date : 
-	create_time :
-	user_id :
-	last_date :
-	complete : 
-}
-
-
-function today_better_check() {
-	if (Session.get("done_load"))
-	{
-		var num_done = done.find({user_id : Meteor.userId(), create_date : Session.get("today")}).count();
-		console.log(num_done);
-		var current_block = num_done + 1;
-		console.log(current_block);
-		if (num_done < 7)
+		},
+	'click #launch_admin' : function(event) {
+		var check = admins.find({user_id : Meteor.userId()});
+		if(check.count() > 0)
 		{
-		$("#block-"+current_block).modal('show');
+			$('#main').html(Meteor.render(Template.admin));
 		}
-		console.log('better_check');
-	}	
-}
-
-*/
+		Template.todayis.today();
+	}
+};
 
 }

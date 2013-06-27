@@ -1,5 +1,6 @@
 <template name="progress">
 	<script src="chart.js"></script>
+	{{#isolate}}
 	<div id="tasks_completed">
 		<h4 class="page-header">Tasks Completed per day:</h4>
 		<canvas id="tasks_completed_chart" width="600" height="400"></canvas>
@@ -16,5 +17,5 @@
 		<h4 class="page-header">Zen Level over time:</h4>
 		<canvas id="zen_chart" width="600" height="400"></canvas>
 	</div>
-	
+	{{/isolate}}
 </template>		

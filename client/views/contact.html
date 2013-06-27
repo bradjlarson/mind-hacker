@@ -1,5 +1,6 @@
 <template name="contact">
-	<div class="span6">
+	{{#isolate}}
+	<div class="">
 		<form id="contact_form">
 			<legend>How can we help you:</legend>
 			{{#isolate}}
@@ -19,7 +20,7 @@
 		</form>
 	</div>
 	{{#if conversations}}
-	<div class="span6">
+	<div class="">
 		{{#each conversations}}
 		<div class="accordion-group">
 		    <div class="accordion-heading">
@@ -28,7 +29,7 @@
 					<p>Created: {{create_date}} | Type: {{type}}</p>
 				</div>
 			</a>	
-			<div id="{{_id}}" class="accordion-body collapse in">
+			<div id="{{_id}}" class="accordion-body collapse">
 	      		<div class="accordion-inner">
 					{{#each messages}}
 					<div class="message">	
@@ -36,7 +37,7 @@
 						<p class="well">{{text}}</p>
 					</div>
 					{{/each}}
-					<textarea class="respond span5" rows="4" id="{{_id}}_respond"></textarea>
+					<textarea class="respond span12" rows="4" id="{{_id}}_respond"></textarea>
 					<button class="btn btn-inverse respond-submit" name="{{_id}}">Respond</button>
 					<button class="btn btn-inverse archive-submit" name="{{_id}}">Archive</button>		
 				</div>	
@@ -45,4 +46,5 @@
 		{{/each}}
 	</div>
 	{{/if}}	
+	{{/isolate}}
 </template>

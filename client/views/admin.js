@@ -29,7 +29,6 @@ Template.admin.events = {
 		convo['messages'].push({date : Session.get("today"), time: Session.get("now"), user: Meteor.userId(), text: $('#'+doc_id+'_respond').val()});
 		convo['resolved'] = true;
 		delete convo['_id'];
-		console.log(convo);
 		contact.update(doc_id, convo);
 	}
 };

@@ -31,7 +31,6 @@ collections['blocks'] = {col_name : "blocks", objs : blocks_records};
 //collections['about'] = {col_name : "about", objs : about_records};
 collections['contact'] = {col_name : "contact", objs : contact_records};
 var all_data = collections;
-console.log(all_data);	
 if (Session.get("export_flag"))
 {
 	clear_export();
@@ -53,7 +52,6 @@ function add_to_export(col_name, objs) {
 	{
 		delete objs[obj]['_id'];
 		var insert_text = col_name+".insert("+JSON.stringify(objs[obj])+")";
-		console.log(insert_text);
 		export_docs.insert({item_type : col_name, item_text : insert_text, user_id : Meteor.userId()});
 	}
 	//Session.set("export_flag", false);

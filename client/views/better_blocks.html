@@ -1,4 +1,5 @@
 <template name="better_blocks">
+	{{#isolate}}
 <!--	
 	{{#each block}}
 		<div id="{{block_name}}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="{{header_name}}" aria-hidden="true">
@@ -326,5 +327,5 @@
 		<button id="7." class="btn btn-success next-block" data-dismiss="modal" aria-hidden="true">Next</button>
 	</div>
 </div>
-		
+	{{/isolate}}	
 </template>						

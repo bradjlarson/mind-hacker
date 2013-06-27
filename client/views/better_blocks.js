@@ -1,15 +1,3 @@
-Template.better_blocks.today_add = function() {
-	var today_count = tasks.find({last_date : Session.get("today"), complete : false}).count();
-	if (today_count < 3)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-};
-
 Template.better_blocks.previous = function() {
 	var today_check = summaries.find({create_date : Session.get("today")});
 	if (today_check.count() != 0)
@@ -59,17 +47,14 @@ Template.better_blocks.today_check = function() {
 	{
 		var less_than = limit.fetch()[0]['num_tasks'];
 	}
-	console.log(less_than);
 	var todays = tasks.find({complete : false});
 	if (todays.count() < less_than)
 	{
 		return true;
-		Session.set("today_done", false);
 	}
 	else
 	{
 		return false;
-		Session.set("today_done", true);
 	}
 };
 
@@ -85,17 +70,13 @@ Template.better_blocks.grateful_check = function() {
 	{
 		var less_than = limit.fetch()[0]['num_gratitudes'];
 	}
-	console.log(less_than);
 	if (gratitudes.count() < less_than)
 	{
 		return true;
-		Session.set("grateful_done", false);
 	}
 	else
 	{
 		return false;
-		Session.set("grateful_done", true);
-		console.log('grateful done');
 	}
 };
 
@@ -111,16 +92,13 @@ Template.better_blocks.counter_check = function() {
 	{
 		var less_than = limit.fetch()[0]['num_counterfactuals'];
 	}
-	console.log(less_than);
 	if (counters.count() < less_than)
 	{
 		return true;
-		Session.set("counter_done", false);
 	}
 	else
 	{
 		return false;
-		Session.set("counter_done", true);
 	}
 };
 
@@ -311,11 +289,8 @@ Template.better_blocks.rendered = function() {
 block_show = function() {
 	if (Session.get("done_load"))
 	{
-		block_id : "intro.1"
 		var num_done = done.find({user_id : Meteor.userId(), create_date : Session.get("today"), block_id : {$nin: ['intro.1', '0.1']}}).count();
-		console.log(num_done);
 		var current_block = num_done + 1;
-		console.log(current_block);
 		if (num_done < 7)
 		{
 			if (Session.get("block_intro"))

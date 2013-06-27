@@ -25,7 +25,6 @@ Template.settings.rendered = function() {
 	else
 	{
 		user_settings.insert({user_id : Meteor.userId(), name : "", email : "", age : "", gender : "", email_reminders : "off", num_tasks : 3, num_gratitudes : 3, num_counterfactuals : 3});
-		console.log('settings added');
 	}
 	//var email = Meteor.users.find({_id : Meteor.userId()}).fetch()[0].emails[0]['address'];
 	var current_profile = user_settings.find({user_id : Meteor.userId()}).fetch()[0];
@@ -35,7 +34,6 @@ Template.settings.rendered = function() {
 		current_profile.email = email;
 	}
 	*/
-	console.log(current_profile);
 	$('#name').val(current_profile['name'] ? current_profile['name'] : "");
 	$('#email').val(current_profile.email ? current_profile.email : "");
 	$('#age').val(current_profile.age ? current_profile.age : "");
@@ -44,7 +42,6 @@ Template.settings.rendered = function() {
 	$('#num_gratitudes').val(current_profile.num_gratitudes ? current_profile.num_gratitudes : "");
 	$('#num_counterfactuals').val(current_profile.num_counterfactuals ? current_profile.num_counterfactuals : "");
 	Session.set("email_reminders", current_profile.email_reminders);
-	console.log(current_profile.email_reminders);
 	$('#emails_'+current_profile.email_reminders).button('toggle');
 	$('#settings_save').removeClass('btn-warning').addClass('btn-primary').html('Settings saved.');
 }		
@@ -71,7 +68,6 @@ function update_setting(setting, value) {
 	*/
 	var doc_id = user_settings.find({user_id : Meteor.userId()}).fetch()[0]['_id'];
 	var current_profile = user_settings.find({user_id : Meteor.userId()}).fetch()[0];
-	console.log(current_profile);
 	current_profile[setting] = value;
 	user_settings.update(doc_id, current_profile);
 }		
