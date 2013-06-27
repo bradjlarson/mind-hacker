@@ -210,7 +210,11 @@ if (ctx)
 	var happy_chart = new Chart(ctx3).Line(motivated_pass, survey_options);
 	var ctx4 = document.getElementById("zen_chart").getContext("2d");
 	var happy_chart = new Chart(ctx4).Line(zen_pass, survey_options);
-}	
+}
+
+
+
+	
 }	
 
 make_chart = function(data, index, value, name) {

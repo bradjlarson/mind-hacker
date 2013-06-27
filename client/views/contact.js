@@ -24,7 +24,7 @@ Template.contact.events = {
 		var convo = contact.find({_id: doc_id}).fetch()[0];
 		convo['last_response'] = Session.get("today")+":"+Session.get("now");
 		convo['messages'].push({date : Session.get("today"), time: Session.get("now"), user: Meteor.userId(), text: $('#'+doc_id+'_respond').val()});
-		convo['resolved'] = true;
+		convo['resolved'] = false;
 		delete convo['_id'];
 		contact.update(doc_id, convo);
 	},
@@ -39,6 +39,6 @@ Template.contact.conversations = function() {
 };
 
 Template.contact.rendered = function() {
-	$('.collapse').collapse();
-	//$('.collapse')[0].collapse('show');
+	//$('.collapse').collapse();
+	$('.collapse').first().collapse('show');
 };

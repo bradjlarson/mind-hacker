@@ -1,6 +1,21 @@
 <template name="admin">
 	{{#isolate}}
 	{{#if is_admin}}
+		<div id="message-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="message-header" aria-hidden="true">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+				<h4 id="message-header">Send a message to a user:</h4>
+			</div>
+			<div class="modal-body">
+				<div id="message-body">
+					<p id="message-user_id">User:</p>
+					<textarea class="span12" id="message-text" rows="4" placeholder="Enter your message here..."></textarea>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button id="message-send" class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Send</button>
+			</div>
+		</div>
 		<div id="user_stats">
 			<h4>Number of users: {{total_users}}</h4>
 		</div>
@@ -38,6 +53,15 @@
 			</div>
 			{{/if}}	
 		</div>
+		<div id="message_users">
+			<table class="table table">
+				{{#each user_profile}}
+				<tr>
+					<td>{{name}}, {{user_id}} <button class="btn btn-primary send-message pull-right" name="{{user_id}}">Message</button></td>
+				</tr>
+				{{/each}}
+			</table>
+		</div>			
 	{{else}}
 		<div>
 			<p>Error, page not found.</p>

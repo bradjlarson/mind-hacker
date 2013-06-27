@@ -9,6 +9,10 @@ Template.admin.is_admin = function() {
 	}
 };
 
+Template.admin.user_profile = function() {
+	return user_settings.find({}, {sort : {name : 1}});
+};
+
 Template.admin.total_users = function() {
 	return Meteor.users.find().count();
 };
@@ -70,6 +74,35 @@ Template.admin.events = {
 		convo['resolved'] = true;
 		delete convo['_id'];
 		contact.update(doc_id, convo);
+	},
+	'click .send-message' : function(event) {
+		var user_id = $(event.target).attr('name');
+		$('#message-user_id').html('User: '+user_id);
+		$('#message-text').attr('name', user_id);
+		$('#message-modal').modal('show');
+	},
+	'click #message-send' : function(event) {
+		var date_time = Session.get("today")+":"+Session.get("now");
+		var user_id = $('#message-text').attr('name');
+		var message = $('#message-text').val();
+		var build_doc = {
+			create_date : Session.get("today"),
+			create_time : Session.get("now"),
+			feedback : "Message from Admins",
+			last_response: date_time,
+			messages : [
+				{
+					date : Session.get("today"),
+					text : message,
+					time : Session.get("now"),
+					user : Meteor.userId()
+				}
+			],
+			resolved : true,
+			type : "Admin Message",
+			user_id : user_id
+		};
+		contact.insert(build_doc);
 	}
 };
 
