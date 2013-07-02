@@ -31,6 +31,7 @@ for (var i=0; i<=30; i++)
 		chart_data[today.today_is()].change_happy = 0;
 		chart_data[today.today_is()].change_motivated = 0;
 		chart_data[today.today_is()].change_zen = 0;
+		chart_data[today.today_is()].blocks_completed = 0;
 		chart_data[today.today_is()].full_date = today.today_is();
 		chart_data[today.today_is()].short_date = today.today_is().slice(0,5);
 		if (i%5 == 0)
@@ -58,6 +59,7 @@ if (ctx)
 	var start_happy = [];
 	var start_motivated = [];
 	var start_zen = [];
+	var blocks_completed = [];
 	
 	all_tasks.forEach(function(item) {
 		var task_date = item.last_date;
@@ -83,6 +85,8 @@ if (ctx)
 	var yesterday_motivated = surveys.find({yesterday_motivated : {$exists : true}, create_date : {$gte : "05/12/2013"}}, {sort : {create_date : 1}});
 	var today_zen = surveys.find({today_zen : {$exists : true}, create_date : {$gte : "05/12/2013"}}, {sort : {create_date : 1}});
 	var yesterday_zen = surveys.find({yesterday_zen : {$exists : true}, create_date : {$gte : "05/12/2013"}}, {sort : {create_date : 1}});
+	var days_using = done.find({user_id : Meteor.userId(), create_date : {$gte : "05/12/2013"}}, {sort : {create_date : 1}});
+	
 	//console.log(today_happy);
 	make_chart(today_happy, "create_date", "today_happy", "end_happy");
 	make_chart(today_motivated, "create_date", "today_motivated", "end_motivated");
@@ -93,9 +97,9 @@ if (ctx)
 	make_chart(yesterday_happy, "create_date", "yesterday_happy", "end_happy");
 	make_chart(yesterday_motivated, "create_date", "yesterday_motivated", "end_motivated");
 	make_chart(yesterday_zen, "create_date", "yesterday_zen", "end_zen");
-	
 	console.log(chart_data);
-	
+	var j = 0;
+	var max_j = 0;
 	for (days in chart_data)
 	{
 		task_labels.push(chart_data[days].short_date);
@@ -107,6 +111,19 @@ if (ctx)
 		start_happy.push(chart_data[days].start_happy);
 		start_motivated.push(chart_data[days].start_motivated);
 		start_zen.push(chart_data[days].start_zen);
+		blocks_completed.push(done.find({user_id : Meteor.userId(), create_date : days}, {sort : {create_date : 1}}).count());
+		if (done.find({user_id : Meteor.userId(), create_date : days}, {sort : {create_date : 1}}).count() > 0)
+		{
+			j++;
+			if (j > max_j)
+			{
+				max_j = j;
+			}
+		}
+		else
+		{
+			j = 0;
+		}
 	}
 	var task_pass = {
 		labels : task_labels,
@@ -186,9 +203,30 @@ if (ctx)
 			}*/
 		]
 	};
+	var usage_pass = {
+		labels : task_labels,
+		datasets : [
+			{
+				fillColor : "rgba(151,187,205,0.5)",
+				strokeColor : "rgba(151,187,205,1)",
+				pointColor : "rgba(151,187,205,1)",
+				pointStrokeColor : "#fff",
+				data : blocks_completed
+			}
+		]
+	};
+	
 	var task_options = {
 		scaleOverride : true,
 		scaleSteps : 5,
+		scaleStepWidth : 1,
+		scaleStartValue : 0,
+		scaleShowGridLines : false,
+		scaleGridLineWidth : 2
+	};
+	var usage_options = {
+		scaleOverride : true,
+		scaleSteps : 7,
 		scaleStepWidth : 1,
 		scaleStartValue : 0,
 		scaleShowGridLines : false,
@@ -203,7 +241,18 @@ if (ctx)
 		scaleGridLineWidth : 2
 	};
 	
-	var tasks_chart = new Chart(ctx).Line(task_pass, task_options);	
+	var tasks_chart = new Chart(ctx).Line(task_pass, task_options);
+	if(max_j > 0)
+	{
+		$('#streak_length').html('<em>Longest Streak: '+max_j+' days in a row!</em>');
+	}
+	else
+	{
+		$('#streak_length').html('No activity yet - click on "Today" to get started!');
+	}	
+	
+	var ctx1 = document.getElementById("usage_chart").getContext("2d");
+	var usage_chart = new Chart(ctx1).Line(usage_pass, usage_options);
 	var ctx2 = document.getElementById("happy_chart").getContext("2d");
 	var happy_chart = new Chart(ctx2).Line(happy_pass, survey_options);
 	var ctx3 = document.getElementById("motivated_chart").getContext("2d");

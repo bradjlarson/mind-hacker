@@ -211,7 +211,7 @@ Template.side_bar.conversations = function() {
 };
 
 Template.side_bar.adminsations = function() {
-	return contact.find({user_id : Meteor.userId(), resolved : false}, {sort : {create_date : -1}}).count();
+	return contact.find({resolved : false}, {sort : {create_date : -1}}).count();
 };
 
 

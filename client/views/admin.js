@@ -1,3 +1,5 @@
+
+
 Template.admin.is_admin = function() {
 	if (admins.find({user_id: Meteor.userId()}).count() > 0) 
 	{
@@ -22,7 +24,51 @@ Template.admin.issue = function() {
 };
 var chart_data = {};
 Template.admin.rendered = function() {
+	Meteor.users.find().forEach(function(a_user) {
+		if (user_settings.find({user_id : a_user['_id'], email : ""}).count() > 0)
+		{
+			if ('services' in a_user) 
+			{ 
+				if ('google' in a_user['services']) 
+				{ 
+					var user_id = user_settings.find({user_id : a_user['_id']}).fetch()[0]; 
+					user_settings.update(user_id['_id'], {$set : {email : a_user['services']['google']['email']}});
+				} 
+			}
+			if (a_user.emails) 
+			{
+				var user_id = user_settings.find({user_id : a_user['_id']}).fetch()[0]; 
+				user_settings.update(user_id['_id'], {$set : {email : a_user.emails[0].address}});
+			}
+		}
+	});					
+	var today = new Date();
+	today.setDate(today.getDate()-30);
 	chart_data = {};
+	daily_usage = {};
+	usage_labels = [];
+	usage_data = [];
+	for (var i=0; i<=30; i++)
+	{
+		if (!(today.today_is() in daily_usage))
+		{
+			daily_usage[today.today_is()] = {};
+			daily_usage[today.today_is()].num_users = 0;
+			daily_usage[today.today_is()].full_date = today.today_is();
+			daily_usage[today.today_is()].short_date = today.today_is().slice(0,5);
+			Meteor.users.find().forEach(function(user){
+				var match_date = today.today_is();
+				if (done.find({user_id : user['_id'], create_date : today.today_is()}).count() > 0)
+				{
+					daily_usage[today.today_is()].num_users ++;
+				}
+			});
+		}
+		usage_labels.push(today.today_is());
+		usage_data.push(daily_usage[today.today_is()].num_users);
+		today.setDate(today.getDate()+1);
+	}
+	
 	Meteor.users.find().forEach(function(user){
 		chart_data[user['_id']] = {};
 		chart_data[user['_id']].num_done = 0;
@@ -33,6 +79,7 @@ Template.admin.rendered = function() {
 	{	
 		Meteor.users.find().forEach(function(user){
 			chart_data[user['_id']].num_done = done.find({user_id : user['_id'], create_date : Session.get("today")}).count();
+			
 		});
 		var labels = [];
 		var data = [];
@@ -63,6 +110,29 @@ Template.admin.rendered = function() {
 		};
 	}
 	var tasks_chart = new Chart(ctx).Bar(data_pass, data_options);	
+	var ctx2 = document.getElementById("user_activity_chart").getContext("2d");
+	var usage_pass = {
+		labels : usage_labels,
+		datasets : [
+			{
+				fillColor : "rgba(151,187,205,0.5)",
+				strokeColor : "rgba(151,187,205,1)",
+				pointColor : "rgba(151,187,205,1)",
+				pointStrokeColor : "#fff",
+				data : usage_data
+			}
+		]
+	};
+	var usage_options = {
+		scaleOverride : true,
+		scaleSteps : 5,
+		scaleStepWidth : 3,
+		scaleStartValue : 0,
+		scaleShowGridLines : true,
+		scaleGridLineWidth : 2
+	};
+	var usage_chart = new Chart(ctx2).Line(usage_pass, usage_options);	
+	
 };
 
 Template.admin.events = {
@@ -85,24 +155,51 @@ Template.admin.events = {
 		var date_time = Session.get("today")+":"+Session.get("now");
 		var user_id = $('#message-text').attr('name');
 		var message = $('#message-text').val();
-		var build_doc = {
-			create_date : Session.get("today"),
-			create_time : Session.get("now"),
-			feedback : "Message from Admins",
-			last_response: date_time,
-			messages : [
-				{
-					date : Session.get("today"),
-					text : message,
-					time : Session.get("now"),
-					user : Meteor.userId()
-				}
-			],
-			resolved : true,
-			type : "Admin Message",
-			user_id : user_id
-		};
-		contact.insert(build_doc);
+		var build_doc = {};
+		if (user_id == "all")
+		{
+			Meteor.users.find().forEach(function(this_user){
+				build_doc = {
+					create_date : Session.get("today"),
+					create_time : Session.get("now"),
+					feedback : "Message from Admins",
+					last_response: date_time,
+					messages : [
+						{
+							date : Session.get("today"),
+							text : message,
+							time : Session.get("now"),
+							user : Meteor.userId()
+						}
+					],
+					resolved : true,
+					type : "Admin Message",
+					user_id : this_user['_id']
+				};
+				contact.insert(build_doc);	
+			});
+		}
+		else
+		{
+			build_doc = {
+				create_date : Session.get("today"),
+				create_time : Session.get("now"),
+				feedback : "Message from Admins",
+				last_response: date_time,
+				messages : [
+					{
+						date : Session.get("today"),
+						text : message,
+						time : Session.get("now"),
+						user : Meteor.userId()
+					}
+				],
+				resolved : true,
+				type : "Admin Message",
+				user_id : user_id
+			};
+			contact.insert(build_doc);
+		}	
 	}
 };
 

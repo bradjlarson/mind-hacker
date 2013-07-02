@@ -39,6 +39,15 @@ Template.today_main.rendered = function() {
 			if (first_check.count() == 0)
 			{
 				$('#site_intro_modal').modal('show');
+				var has_settings = user_settings.find({user_id : Meteor.userId()});
+				if(has_settings.count() > 0)
+				{
+					console.log('settings found');
+				}
+				else
+				{
+					user_settings.insert({user_id : Meteor.userId(), name : "", email : "", age : "", gender : "", email_reminders : "off", num_tasks : 3, num_gratitudes : 3, num_counterfactuals : 3});
+				}
 			}
 			else
 			{

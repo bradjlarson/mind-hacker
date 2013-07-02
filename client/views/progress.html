@@ -1,6 +1,13 @@
 <template name="progress">
 	<script src="chart.js"></script>
 	{{#isolate}}
+	<div id="current_streak">
+		<h4 id="streak_length"class="page-header">Longest Streak: </h4>
+	</div>	
+	<div id="daily_activity">
+		<h4 class="page-header">Better Blocks Completed per day:</h4>
+		<canvas id="usage_chart" width="600" height="400"></canvas>
+	</div>
 	<div id="tasks_completed">
 		<h4 class="page-header">Tasks Completed per day:</h4>
 		<canvas id="tasks_completed_chart" width="600" height="400"></canvas>

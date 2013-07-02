@@ -1,5 +1,4 @@
 <template name="contact">
-	{{#isolate}}
 	<div class="">
 		<form id="contact_form">
 			<legend>How can we help you:</legend>
@@ -19,6 +18,7 @@
 			</div>
 		</form>
 	</div>
+	{{#isolate}}
 	{{#if conversations}}
 	<div class="">
 		{{#each conversations}}
@@ -45,6 +45,6 @@
 		</div>
 		{{/each}}
 	</div>
-	{{/if}}	
-	{{/isolate}}
+	{{/if}}
+	{{/isolate}}	
 </template>

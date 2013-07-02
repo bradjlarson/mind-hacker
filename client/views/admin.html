@@ -20,11 +20,19 @@
 			<h4>Number of users: {{total_users}}</h4>
 		</div>
 		<div id="blocks_completed">
-			<h4 class="page-header">Better Blocks Completed Today:</h4>
+			<h4 class="page-header">User Activity over the past month:</h4>
+			<canvas id="user_activity_chart" width="600" height="400"></canvas>
+		</div>
+		<div id="blocks_completed">
+			<h4 class="page-header">Better Blocks Completed Today by User:</h4>
 			<canvas id="blocks_completed_chart" width="600" height="400"></canvas>
 		</div>
+		
 		<div id="conversations" class="accordion">
 			{{#if issue}}
+			<div>
+				<h4>Unanswered feedback</h4>
+			</div>
 			{{#each issue}}
 			<div class="accordion-group">
 			    <div class="accordion-heading">
@@ -54,10 +62,14 @@
 			{{/if}}	
 		</div>
 		<div id="message_users">
-			<table class="table table">
+			<h4>Send messages to users</h4>
+			<table class="table table-bordered table-condensed">
+				<tr>
+					<td><strong>All users</strong> <button class="btn btn-primary send-message pull-right" name="all">Message</button></td>
+				</tr>
 				{{#each user_profile}}
 				<tr>
-					<td>{{name}}, {{user_id}} <button class="btn btn-primary send-message pull-right" name="{{user_id}}">Message</button></td>
+					<td>{{email}}, {{user_id}} <button class="btn btn-primary send-message pull-right" name="{{user_id}}">Message</button></td>
 				</tr>
 				{{/each}}
 			</table>
