@@ -3,11 +3,12 @@
 </head>
 
 <body>
-	
 	<div>
 		{{> splash}}
 	</div>
 </body>
+
+<template name="setup_ga"></template>
 
 <template name="todayis">
 <div class="row-fluid span10">	
@@ -42,7 +43,7 @@
 		{{> login_beta}}
 	{{/if}}	
 	{{#if logged_in}}
-			<div class="clearfix">
+			<div class="clearfix">	
 			{{#isolate}}	
 			{{> better_blocks}}
 			{{> todayis}}
@@ -85,7 +86,9 @@
 			<p class="text-center">A <a href="http://larson-ventures.com">Larson Ventures LLC</a> Production.</p>
 		</div>
 	</div>
-</template>			 	
+</template>		
+
+	 	
 
 
 		

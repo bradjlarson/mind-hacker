@@ -11,11 +11,25 @@
 	</table>
 </template>
 
+<template name="export_docs_chartjs">
+	<table class="table-bordered table table-condensed">
+		{{#isolate}}
+		{{#each export_item}}
+			<tr>
+				<!--  <td>{{item_type}}</td>  -->
+				<td>{{item_text}}</td>
+			</tr>
+		{{/each}}
+		{{/isolate}}
+	</table>
+</template>
+
 <template name="export_main">
 	<div class="">
 		<p>At BetterMe, we believe you should have access to your data. So we've made it easy to download all of your data for storage or analysis. The data is stored as MongoDB insert commands. If you'd like the data another way, let us know.</p>
 		<p>To get a copy, just click the "Export button below". </p>
 		<button class="btn btn-primary pull-left" id="generate_export">Export</button>
+		<button class="btn btn-primary pull-left" id="generate_chartjs">Export for Chart.js</button>
 		<div id="export_container">
 		</div>	
 	</div>

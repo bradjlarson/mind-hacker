@@ -15,6 +15,227 @@ user_settings = new Meteor.Collection("user_settings");
 if (Meteor.isServer)
 {
 	
+tasks.allow({
+	insert : function(userId, doc) {return (userId && doc.user_id === userId);},
+	update : function(userId, doc) {return (doc.user_id === userId);},
+	remove : function(userId, doc) {return (doc.user_id === userId);},
+	fetch: ['user_id']
+});
+summaries.allow({
+	insert : function(userId, doc) {return (userId && doc.user_id === userId);},
+	update : function(userId, doc) {return (doc.user_id === userId);},
+	remove : function(userId, doc) {return (doc.user_id === userId);},
+	fetch: ['user_id']
+});
+grateful.allow({
+	insert : function(userId, doc) {return (userId && doc.user_id === userId);},
+	update : function(userId, doc) {return (doc.user_id === userId);},
+	remove : function(userId, doc) {return (doc.user_id === userId);},
+	fetch: ['user_id']
+});
+done.allow({
+	insert : function(userId, doc) {return (userId && doc.user_id === userId);},
+	update : function(userId, doc) {return (doc.user_id === userId);},
+	remove : function(userId, doc) {return (doc.user_id === userId);},
+	fetch: ['user_id']
+});
+surveys.allow({
+	insert : function(userId, doc) {return (userId && doc.user_id === userId);},
+	update : function(userId, doc) {return (doc.user_id === userId);},
+	remove : function(userId, doc) {return (doc.user_id === userId);},
+	fetch: ['user_id']
+});
+counterfact.allow({
+	insert : function(userId, doc) {return (userId && doc.user_id === userId);},
+	update : function(userId, doc) {return (doc.user_id === userId);},
+	remove : function(userId, doc) {return (doc.user_id === userId);},
+	fetch: ['user_id']
+});
+contact.allow({
+	insert : function(userId, doc) {return (userId && doc.user_id === userId);},
+	update : function(userId, doc) {return (doc.user_id === userId);},
+	remove : function(userId, doc) {return (doc.user_id === userId);},
+	fetch: ['user_id']
+});
+export_docs.allow({
+	insert : function(userId, doc) {return (userId && doc.user_id === userId);},
+	update : function(userId, doc) {return (doc.user_id === userId);},
+	remove : function(userId, doc) {return (doc.user_id === userId);},
+	fetch: ['user_id']
+});
+user_settings.allow({
+	insert : function(userId, doc) {return (userId && doc.user_id === userId);},
+	update : function(userId, doc) {return (doc.user_id === userId);},
+	remove : false,
+	fetch: ['user_id']
+});
+
+admins.allow({
+	insert : function(userId) {return (userId == "AR48pcJeTuLqmNFWn")},
+	update : function(userId) {return (userId == "AR48pcJeTuLqmNFWn")},
+	remove : function(userId) {return (userId == "AR48pcJeTuLqmNFWn")},
+});
+
+contact.allow({
+	insert : function(userId) {return (userId == "AR48pcJeTuLqmNFWn")},
+	update : function(userId) {return (userId == "AR48pcJeTuLqmNFWn")},
+	remove : function(userId) {return (userId == "AR48pcJeTuLqmNFWn")},
+});
+Meteor.users.allow({
+	insert : function(userId) {return (userId == "AR48pcJeTuLqmNFWn")},
+	update : function(userId) {return (userId == "AR48pcJeTuLqmNFWn")},
+	remove : function(userId) {return (userId == "AR48pcJeTuLqmNFWn")},
+});
+user_settings.allow({
+	insert : function(userId) {return (userId == "AR48pcJeTuLqmNFWn")},
+	update : function(userId) {return (userId == "AR48pcJeTuLqmNFWn")},
+	remove : function(userId) {return (userId == "AR48pcJeTuLqmNFWn")},
+});
+
+tasks.deny({
+	insert: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	},
+	remove: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	},
+	update: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	}
+});
+
+summaries.deny({
+	insert: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	},
+	remove: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	},
+	update: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	}
+});
+
+grateful.deny({
+	insert: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	},
+	remove: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	},
+	update: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	}
+});
+
+done.deny({
+	insert: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	},
+	remove: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	},
+	update: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	}
+});
+
+surveys.deny({
+	insert: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	},
+	remove: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	},
+	update: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	}
+});
+
+counterfact.deny({
+	insert: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	},
+	remove: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	},
+	update: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	}
+});
+
+blocks.deny({
+	insert: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	},
+	remove: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	},
+	update: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	}
+});
+
+about.deny({
+	insert: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	},
+	remove: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	},
+	update: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	}
+});
+
+contact.deny({
+	insert: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	},
+	remove: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	},
+	update: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	}
+});
+
+admins.deny({
+	insert: function(userId) {
+		return (userId != "AR48pcJeTuLqmNFWn");
+	},
+	remove: function(userId) {
+		return (userId != "AR48pcJeTuLqmNFWn");
+	},
+	update: function(userId) {
+		return (userId != "AR48pcJeTuLqmNFWn");
+	}
+});
+
+export_docs.deny({
+	insert: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	},
+	remove: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	},
+	update: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	}
+});
+
+user_settings.deny({
+	insert: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	},
+	remove: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	},
+	update: function(userId) {
+		return (userId == "vaAvhoP84ouxRxRu9");
+	}
+});
+	
 //Accounts.config({forbidClientAccountCreation : true});
 Meteor.publish("Tasks", function() {
 	return tasks.find({user_id : this.userId});

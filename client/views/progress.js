@@ -86,11 +86,11 @@ if (ctx)
 	var today_zen = surveys.find({today_zen : {$exists : true}, create_date : {$gte : "05/12/2013"}}, {sort : {create_date : 1}});
 	var yesterday_zen = surveys.find({yesterday_zen : {$exists : true}, create_date : {$gte : "05/12/2013"}}, {sort : {create_date : 1}});
 	var days_using = done.find({user_id : Meteor.userId(), create_date : {$gte : "05/12/2013"}}, {sort : {create_date : 1}});
-	
+	console.log(today_happy);
 	//console.log(today_happy);
-	make_chart(today_happy, "create_date", "today_happy", "end_happy");
-	make_chart(today_motivated, "create_date", "today_motivated", "end_motivated");
-	make_chart(today_zen, "create_date", "today_zen", "end_zen");
+	//make_chart(today_happy, "create_date", "today_happy", "end_happy");
+	//make_chart(today_motivated, "create_date", "today_motivated", "end_motivated");
+	//make_chart(today_zen, "create_date", "today_zen", "end_zen");
 	make_chart(today_happy, "create_date", "today_happy", "start_happy");
 	make_chart(today_motivated, "create_date", "today_motivated", "start_motivated");
 	make_chart(today_zen, "create_date", "today_zen", "start_zen");
@@ -137,9 +137,9 @@ if (ctx)
 			}
 			/*,
 			{
-				fillColor : "rgba(220,220,220,0.5)",
-				strokeColor : "rgba(220,220,220,1)",
-				pointColor : "rgba(220,220,220,1)",
+				fillColor : "rgba(252,168,65,0.5)",
+				strokeColor : "rgba(252,168,65,1)",
+				pointColor : "rgba(252,168,65,1)",
 				pointStrokeColor : "#fff",
 				data : task_created
 			}
@@ -150,57 +150,57 @@ if (ctx)
 		labels : task_labels,
 		datasets : [
 			{
+				fillColor : "rgba(252,168,65,0.5)",
+				strokeColor : "rgba(252,168,65,1)",
+				pointColor : "rgba(252,168,65,1)",
+				pointStrokeColor : "#fff",
+				data : start_happy
+			},
+			{
 				fillColor : "rgba(151,187,205,0.5)",
 				strokeColor : "rgba(151,187,205,1)",
 				pointColor : "rgba(151,187,205,1)",
 				pointStrokeColor : "#fff",
 				data : end_happy
-			}/*,
-			{
-				fillColor : "rgba(220,220,220,0.5)",
-				strokeColor : "rgba(220,220,220,1)",
-				pointColor : "rgba(220,220,220,1)",
-				pointStrokeColor : "#fff",
-				data : start_happy
-			}*/
+			}
 		]
 	};
 	var motivated_pass = {
 		labels : task_labels,
 		datasets : [
 			{
+				fillColor : "rgba(252,168,65,0.5)",
+				strokeColor : "rgba(252,168,65,1)",
+				pointColor : "rgba(252,168,65,1)",
+				pointStrokeColor : "#fff",
+				data : start_motivated
+			},
+			{
 				fillColor : "rgba(151,187,205,0.5)",
 				strokeColor : "rgba(151,187,205,1)",
 				pointColor : "rgba(151,187,205,1)",
 				pointStrokeColor : "#fff",
 				data : end_motivated
-			}/*,
-			{
-				fillColor : "rgba(220,220,220,0.5)",
-				strokeColor : "rgba(220,220,220,1)",
-				pointColor : "rgba(220,220,220,1)",
-				pointStrokeColor : "#fff",
-				data : start_motivated
-			}*/
+			}
 		]
 	};
 	var zen_pass = {
 		labels : task_labels,
 		datasets : [
 			{
+				fillColor : "rgba(252,168,65,0.5)",
+				strokeColor : "rgba(252,168,65,1)",
+				pointColor : "rgba(252,168,65,1)",
+				pointStrokeColor : "#fff",
+				data : start_zen
+			},
+			{
 				fillColor : "rgba(151,187,205,0.5)",
 				strokeColor : "rgba(151,187,205,1)",
 				pointColor : "rgba(151,187,205,1)",
 				pointStrokeColor : "#fff",
 				data : end_zen
-			}/*,
-			{
-				fillColor : "rgba(220,220,220,0.5)",
-				strokeColor : "rgba(220,220,220,1)",
-				pointColor : "rgba(220,220,220,1)",
-				pointStrokeColor : "#fff",
-				data : start_zen
-			}*/
+			}
 		]
 	};
 	var usage_pass = {

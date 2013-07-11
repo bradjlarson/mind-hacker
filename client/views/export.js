@@ -2,10 +2,17 @@ Template.export_docs.export_item = function() {
 	return export_docs.find();
 };
 
+Template.export_docs_chartjs.export_item = function() {
+	return export_docs.find();
+};
+
 //[tasks, summaries, grateful, done, surveys, counterfact, blocks, about, contact];
 Template.export_main.events = {
 	'click #generate_export' : function() {
 		$('#export_container').html(Meteor.render(Template.export_docs));
+	},
+	'click #generate_chartjs' : function() {
+		$('#export_container').html(Meteor.render(Template.export_docs_chartjs));
 	}
 };
 
@@ -57,7 +64,19 @@ function add_to_export(col_name, objs) {
 	//Session.set("export_flag", false);
 }
 
-function clear_export() {
+add_for_chartjs = function(col_name, objs) {
+	for (obj in objs) 
+	{
+		delete objs[obj]['_id'];
+		if(col_name == "tasks") {delete objs[obj]['task'];}
+		var insert_text = col_name+".insert("+JSON.stringify(objs[obj])+")";
+		console.log(insert_text);
+		export_docs.insert({item_type : col_name, item_text : insert_text, user_id : Meteor.userId()});
+	}
+	//Session.set("export_flag", false);
+}
+
+clear_export = function() {
 	var docs = export_docs.find().forEach(function(doc) {
 		export_docs.remove(doc['_id']);
 	});
